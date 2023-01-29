@@ -1,5 +1,5 @@
 const Admin = (props) => {
-    return <div>Trang Admin</div>
+    return <div>Trang Adamin</div>
 }
 
 export default Admin
