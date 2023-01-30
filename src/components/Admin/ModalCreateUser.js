@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
+import { createUser } from '../../services/apiServices';
+import { toast } from 'react-toastify';
+
 const ModalCreateUser = (props) => {
     const { show, setShow } = props
     const [email, setEmail] = useState("")
@@ -27,6 +30,32 @@ const ModalCreateUser = (props) => {
         setRole("user")
         setImage("")
         setImgPreview("")
+    }
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+    };
+    const handleCreateUser = async () => {
+        if (!validateEmail(email)) {
+            toast.error("Invalid Email")
+            return;
+        }
+        if (password.length < 6) {
+            toast.error("Invalid Password")
+            return;
+        }
+
+        const res = await createUser(email, password, username, role, image)
+        if (res && res.EC === 0) {
+            handleClose()
+            toast(res.EM)
+            props.fetchListUser()
+        } else {
+            toast.error(res.EM)
+        }
     }
     return (
 
@@ -98,7 +127,7 @@ const ModalCreateUser = (props) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={() => handleCreateUser()}>
                     Create
                 </Button>
             </Modal.Footer>
