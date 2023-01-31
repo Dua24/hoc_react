@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
-import { createUser } from '../../services/apiServices';
+import { updateUser } from '../../services/apiServices';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import _ from "lodash"
 
-const ModalCreateUser = (props) => {
-    const { show, setShow } = props
+const ModalViewUser = (props) => {
+    const { show, setShow, dataUser } = props
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
@@ -15,49 +17,25 @@ const ModalCreateUser = (props) => {
     const [image, setImage] = useState("")
     const [imgPreview, setImgPreview] = useState("")
 
-    const handlePreviewImg = (e) => {
-        if (e.target && e.target.files[0]) {
-            setImgPreview(URL.createObjectURL(e.target.files[0]))
-            setImage(e.target.files[0])
+
+    useEffect(() => {
+        if (!_.isEmpty(dataUser)) {
+            setEmail(dataUser.email)
+            setUsername(dataUser.username)
+            setRole(dataUser.role)
+            // set img base64
+            if (dataUser.image) {
+                setImgPreview(`data:image/png;base64,${dataUser.image}`)
+            }
         }
-    }
+    }, [dataUser])
+
     const handleClose = () => {
         setShow(false)
-        setEmail("")
-        setPassword("")
-        setUsername("")
-        setRole("user")
-        setImage("")
-        setImgPreview("")
     }
-    const validateEmail = (email) => {
-        return String(email)
-            .toLowerCase()
-            .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            );
-    };
-    const handleCreateUser = async () => {
-        if (!validateEmail(email)) {
-            toast.error("Invalid Email")
-            return;
-        }
-        if (password.length < 6) {
-            toast.error("Invalid Password")
-            return;
-        }
 
-        const res = await createUser(email, password, username, role, image)
-        if (res && res.EC === 0) {
-            handleClose()
-            toast.success(res.EM)
-            props.setCurrentPage(1)
-            await props.fetchListUserPaginate(1)
 
-        } else {
-            toast.error(res.EM)
-        }
-    }
+
     return (
 
         <Modal
@@ -66,7 +44,7 @@ const ModalCreateUser = (props) => {
             onHide={handleClose}
             backdrop="static">
             <Modal.Header closeButton>
-                <Modal.Title>Modal Create User</Modal.Title>
+                <Modal.Title>Modal View User</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form className="row g-3">
@@ -77,6 +55,7 @@ const ModalCreateUser = (props) => {
                             className="form-control"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            disabled
                         />
                     </div>
                     <div className="col-md-6">
@@ -86,6 +65,8 @@ const ModalCreateUser = (props) => {
                             className="form-control"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            disabled
+
                         />
                     </div>
                     <div className="col-md-6">
@@ -95,6 +76,7 @@ const ModalCreateUser = (props) => {
                             className="form-control"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            disabled
                         />
                     </div>
                     <div className="col-md-6">
@@ -103,6 +85,7 @@ const ModalCreateUser = (props) => {
                             className="form-select"
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
+                            disabled
                         >
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
@@ -113,7 +96,8 @@ const ModalCreateUser = (props) => {
                         <input
                             id="imgPre"
                             hidden type="file"
-                            onChange={(e) => handlePreviewImg(e)}
+                            // onChange={(e) => handlePreviewImg(e)}
+                            disabled
                         />
                     </div>
 
@@ -128,12 +112,9 @@ const ModalCreateUser = (props) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={() => handleCreateUser()}>
-                    Create
-                </Button>
             </Modal.Footer>
         </Modal>
     );
 }
 
-export default ModalCreateUser
+export default ModalViewUser

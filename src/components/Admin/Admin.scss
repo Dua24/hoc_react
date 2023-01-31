@@ -8,6 +8,12 @@
         .sidebarIcon{
             font-size: 30px;
         }
+        .users-content{
+            .pagination{
+                display: flex;
+                justify-content: center;
+            }
+        }
     }
 }
 .modal-content{

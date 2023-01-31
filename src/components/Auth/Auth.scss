@@ -1,0 +1,32 @@
+.auth-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    form{
+        width: 30vw;
+    }
+    button.auth{
+        width: 100%;
+    }
+    .title{
+        text-align: center;
+    }
+    .btn.btn-link{
+        font-size: 17px;
+        color: #000;
+    }
+    .wrapPasswordToggle{
+        position: relative;
+        display: flex;
+        align-items: center;
+        span{
+            position: absolute;
+            right: 0;
+            margin-right: 10px;
+        }
+    }
+    .form-control{
+        padding:.375rem 1.95rem .375rem .75rem
+    }
+}

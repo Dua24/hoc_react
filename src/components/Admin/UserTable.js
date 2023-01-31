@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react"
-import { toast } from 'react-toastify';
+
 const UserTable = (props) => {
     const { listUser } = props
     return (
@@ -22,8 +21,8 @@ const UserTable = (props) => {
                         <td>{item.email}</td>
                         <td>{item.role}</td>
                         <td>
-                            <button className="btn btn-primary">View</button>
-                            <button className="btn btn-warning mx-3">Update</button>
+                            <button onClick={() => props.handleClickBtnViewUser(item)} className="btn btn-primary">View</button>
+                            <button onClick={() => props.handleClickBtnUpdateUser(item)} className="btn btn-warning mx-3">Update</button>
                             <button onClick={() => props.handleClickBtnDeleteUser(item)} className="btn btn-danger">Delete</button>
                         </td>
                     </tr>
