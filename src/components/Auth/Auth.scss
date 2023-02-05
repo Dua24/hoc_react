@@ -8,7 +8,19 @@
     }
     button.auth{
         width: 100%;
+        .loader-icon{
+            margin-right: 7px;
+            animation: spin 1s infinite linear;
+            color: #0e82b7;
+        }
+        &:disabled{
+            background-color:#dddddd;
+            color: #afafaf;
+            cursor: not-allowed;
+            pointer-events:initial
+        }
     }
+    
     .title{
         text-align: center;
     }
@@ -28,5 +40,15 @@
     }
     .form-control{
         padding:.375rem 1.95rem .375rem .75rem
+    }
+}
+
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+    to {
+        transform: scale(1) rotate(360deg);
     }
 }

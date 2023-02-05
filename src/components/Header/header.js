@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
 const Header = () => {
     const navigate = useNavigate()
     const handleClickBtnLogin = () => {
@@ -12,6 +13,11 @@ const Header = () => {
     const handleClickBtnRegister = () => {
         navigate("/register")
     }
+
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated)
+    const account = useSelector(state => state.user.account)
+
+
     return (
         <Navbar bg="light" expand="lg">
             <Container>
@@ -24,13 +30,19 @@ const Header = () => {
                         <NavLink className="nav-link" to="/admins">Admin</NavLink>
                     </Nav>
                     <Nav>
-                        <button onClick={() => handleClickBtnLogin()} className="btn-login">Log in</button>
-                        <button onClick={() => handleClickBtnRegister()} className="btn-signup">Sign up</button>
-                        {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
-                            <NavDropdown.Item >Log in</NavDropdown.Item>
-                            <NavDropdown.Item >Log out</NavDropdown.Item>
-                            <NavDropdown.Item >Profile</NavDropdown.Item>
-                        </NavDropdown> */}
+                        {!isAuthenticated ?
+                            <>
+                                <button onClick={() => handleClickBtnLogin()} className="btn-login">Log in</button>
+                                <button onClick={() => handleClickBtnRegister()} className="btn-signup">Sign up</button>
+                            </>
+                            :
+                            <NavDropdown title="Settings" id="basic-nav-dropdown">
+                                <NavDropdown.Item >Log out</NavDropdown.Item>
+                                <NavDropdown.Item >Profile</NavDropdown.Item>
+                            </NavDropdown>
+
+                        }
+
                     </Nav>
                 </Navbar.Collapse>
             </Container>

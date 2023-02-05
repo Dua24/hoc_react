@@ -1,8 +1,12 @@
 import "./Auth.scss"
 import { FaFacebookSquare, FaInstagramSquare, FaTwitterSquare, FaGithubSquare } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+
+
+
 const Login = (props) => {
     const navigate = useNavigate()
+
     const handleClickBtnRegister = () => {
         navigate("/register")
     }

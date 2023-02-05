@@ -5,14 +5,23 @@ import { login, register } from "../../services/apiServices"
 import { useState } from 'react'
 import { toast } from 'react-toastify';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useDispatch } from "react-redux"
+import { doLogin } from "../../redux/action/userAction";
+import { ImSpinner10 } from "react-icons/im";
+
+
 const Auth = (props) => {
-    const { registerComponent } = props
+    const { loginType, registerType } = props
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
+    const [loadingIcon, setLoadingIcon] = useState(false)
     const navigate = useNavigate()
+
+    const dispatch = useDispatch()
+
     const handleClickBtnRegister = () => {
         setEmail("")
         setPassword("")
@@ -44,18 +53,22 @@ const Auth = (props) => {
             toast.error("Password must have length > 6")
             return;
         }
-        if (registerComponent && (confirmPassword == "" || confirmPassword !== password)) {
+        if (registerType && (confirmPassword == "" || confirmPassword !== password)) {
             toast.error("Invalid Password confirmed")
             return;
         }
         let res;
-        registerComponent ? res = await register(email, username, password) : res = await login(email, password)
+        setLoadingIcon(true)
+        registerType ? res = await registerType(email, username, password) : res = await login(email, password)
         if (res && res.EC === 0) {
-            navigate("/")
-            toast.success(res.EM)
+            if (!registerType) {
+                dispatch(doLogin(res))
+            }
+            setLoadingIcon(false)
             setEmail("")
             setPassword("")
-
+            navigate("/")
+            toast.success(res.EM)
         }
         else {
             toast.error(res.EM)
@@ -63,11 +76,10 @@ const Auth = (props) => {
             setPassword("")
         }
     }
-
     return (
         <div className="auth-container">
             <form onSubmit={(e) => e.preventDefault()} >
-                <h2 className="title mb-4">{registerComponent ? 'Register' : 'Login'}</h2>
+                <h2 className="title mb-4">{registerType ? 'Register' : 'Login'}</h2>
                 <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="form2Example1">Email address:</label>
                     <input
@@ -79,7 +91,7 @@ const Auth = (props) => {
                     />
                 </div>
                 {
-                    registerComponent &&
+                    registerType &&
                     <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="form2Example2">Username:</label>
                         <input
@@ -109,7 +121,7 @@ const Auth = (props) => {
                     </div>
                 </div>
                 {
-                    registerComponent &&
+                    registerType &&
 
                     <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="form2Example2">Confirm Password:</label>
@@ -125,10 +137,20 @@ const Auth = (props) => {
                     </div>
                 }
 
-                <button onClick={() => handleSubmit()} className="btn btn-primary btn-block mb-4 auth">{registerComponent ? "Sign up" : "Login"}</button>
+                <button
+                    onClick={() => handleSubmit()}
+                    className="btn btn-primary btn-block mb-4 auth"
+                    disabled={loadingIcon ? true : false}
+                >
+                    <span>
+                        {loadingIcon && <ImSpinner10 className="loader-icon" />}
+
+                        <span>{registerType ? "Register" : "Login"}</span>
+                    </span>
+                </button>
 
                 <div className="row mb-4">
-                    {!registerComponent &&
+                    {!registerType &&
                         <>
                             <div className="col-6 d-flex mb-2">
                                 <div className="form-check">
@@ -148,14 +170,14 @@ const Auth = (props) => {
 
 
                 <div className="text-center">
-                    {registerComponent ?
+                    {registerType ?
                         <p onClick={() => handleClickBtnLogin()}>Had account? <span>Sign in</span> </p>
                         :
                         <p onClick={() => handleClickBtnRegister()}>Not a member? <span>Register</span> </p>
 
                     }
 
-                    <p>{registerComponent ? 'or sign up with:' : 'or login with'}</p>
+                    <p>{registerType ? 'or sign up with:' : 'or login with'}</p>
                     <button type="button" className="btn btn-link btn-floating mx-1">
                         <FaFacebookSquare />
                     </button>

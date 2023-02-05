@@ -25,10 +25,12 @@ const Layout = () => {
                     <Route index element={<Dashboard />} />
                     <Route path="manage-users" element={<ManageUsers />} />
                 </Route>
-                <Route path="login" element={<Auth />}
+                <Route path="login" element={<Auth
+                    loginType
+                />}
                 />
                 <Route path="register" element={<Auth
-                    registerComponent
+                    registerType
                 />}
                 />
             </Routes>
