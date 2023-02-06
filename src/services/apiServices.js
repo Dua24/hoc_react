@@ -33,10 +33,19 @@ const login = (email, password) => {
         {
             email,
             password,
-            delay: 3000
+            delay: 2000
         })
 }
 const register = (email, username, password) => {
     return axios.post('api/v1/register', { email, username, password })
 }
-export { createUser, getAllUsers, deleteUser, updateUser, getUsersWithPaginate, login, register } 
+
+const getQuizByUser = () => {
+    return axios.get('api/v1/quiz-by-participant')
+}
+
+const getQuestionByQuizId = (quizId) => {
+    return axios.get(`api/v1/questions-by-quiz?quizId=${quizId}`)
+
+}
+export { createUser, getAllUsers, deleteUser, updateUser, getUsersWithPaginate, login, register, getQuizByUser, getQuestionByQuizId } 

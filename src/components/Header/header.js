@@ -14,9 +14,8 @@ const Header = () => {
         navigate("/register")
     }
 
-    const isAuthenticated = useSelector(state => state.user.isAuthenticated)
-    const account = useSelector(state => state.user.account)
-
+    const { isAuthenticated, account } = useSelector(state => state.user)
+    // const account = useSelector(state => state.user.account)
 
     return (
         <Navbar bg="light" expand="lg">
