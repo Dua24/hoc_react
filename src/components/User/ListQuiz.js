@@ -9,6 +9,8 @@ const ListQuiz = (props) => {
         fetchListQuiz()
     }, [])
 
+
+
     const fetchListQuiz = async () => {
         const res = await getQuizByUser()
         if (res.EC == 0) {
@@ -22,9 +24,9 @@ const ListQuiz = (props) => {
                     <div className="card" style={{ width: "18rem" }} key={index}>
                         <img src={`data:image/png;base64, ${item.image}`} className="card-img-top" alt="..." />
                         <div className="card-body">
-                            <h5 className="card-title">Quiz {item.id + 1}</h5>
+                            <h5 className="card-title">Quiz {item.id}</h5>
                             <p className="card-text">{item.description}</p>
-                            <a onClick={() => nagivate(`/quiz/${item.id}`)} className="btn btn-primary">Start now</a>
+                            <a onClick={() => nagivate(`/quiz/${item.id}`, { state: { quizTitle: item.description, } })} className="btn btn-primary">Start now</a>
                         </div>
                     </div>
                 )
