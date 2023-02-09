@@ -2,12 +2,12 @@ import { useEffect } from "react"
 import _ from "lodash"
 const Question = (props) => {
     const { dataQuiz, indexQuestion } = props
-    console.log(dataQuiz)
-
     if (_.isEmpty(dataQuiz)) {
         return (<></>)
     }
-
+    const handleCheckBoxs = (e, answId, idQuestion) => {
+        props.handleCheckBox(answId, idQuestion)
+    }
 
     return (
         <>
@@ -26,14 +26,17 @@ const Question = (props) => {
                         return (
                             <div key={index} className="a-child">
                                 <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox" value=""
+                                        id="flexCheckChecked"
+                                        onChange={(e) => handleCheckBoxs(e, answ.id, dataQuiz.questionId)}
+                                        checked={answ.isChecked}
+                                    />
                                     <label className="form-check-label" htmlFor="flexCheckChecked">
                                         {index + 1}. {answ.description}
                                     </label>
                                 </div>
-
-
-
                             </div>
                         )
                     }

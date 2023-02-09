@@ -22,7 +22,7 @@ const updateUser = (id, username, role, userImage) => {
     data.append('username', username)
     data.append('role', role)
     data.append('userImage', userImage)
-    return axios.put('api/v1/participant', data)
+    return axios.put('api/v1/participant', data) // truyen form data
 }
 const getUsersWithPaginate = (page, limit) => {
     return axios.get(`api/v1/participant?page=${page}&limit=${limit}`)
@@ -34,7 +34,7 @@ const login = (email, password) => {
             email,
             password,
             delay: 2000
-        })
+        }) // <-- truyen theo form-urlencoded
 }
 const register = (email, username, password) => {
     return axios.post('api/v1/register', { email, username, password })
@@ -46,6 +46,9 @@ const getQuizByUser = () => {
 
 const getQuestionByQuizId = (quizId) => {
     return axios.get(`api/v1/questions-by-quiz?quizId=${quizId}`)
-
 }
-export { createUser, getAllUsers, deleteUser, updateUser, getUsersWithPaginate, login, register, getQuizByUser, getQuestionByQuizId } 
+
+const postSubmitQuiz = (data) => {
+    return axios.post(`api/v1/quiz-submit`, { ...data }) //<-- truyen theo row
+}
+export { createUser, getAllUsers, deleteUser, updateUser, getUsersWithPaginate, login, register, getQuizByUser, getQuestionByQuizId, postSubmitQuiz } 
