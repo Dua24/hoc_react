@@ -1,0 +1,99 @@
+.questions-container{
+    padding: 15px;
+
+    .title{
+        margin-bottom: 15px;
+        font-size:20px;
+        font-weight: 600;
+    }
+    .questions-content{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        .form-floating{
+            width: 50%;
+        }
+        .group-upload{
+            .lable-up{
+                height:30px;
+                border-radius: 5px;
+                padding: 0 10px;
+                margin-right: 5px;
+                cursor: pointer;
+            }
+            .uploadIcon{
+                font-size: 20px;
+                color: #223abd;
+                opacity: 0.7;
+                &:hover{
+                    opacity: 1;
+                }
+                transition: all ease 0.2s;
+
+            }
+        }
+        .btn-group{
+            .icon-add{
+                font-size: 26px;
+                color: #229922;
+                cursor: pointer;
+                opacity: 0.7;
+                &:hover{
+                    opacity: 1;
+                }
+                transition: all ease 0.2s;
+            }
+            .icon-delete{
+                margin-left: 10px;
+                font-size: 26px;
+                color: #f21212;
+                cursor: pointer;
+                opacity: 0.7;
+                &:hover{
+                    opacity: 1;
+                }
+                transition: all ease 0.2s;
+             
+            }
+        }
+    }
+
+    .answers-content{
+        display: flex;
+        gap:15px;
+        align-items: center;
+        .isCorrect{
+            font-size: 20px;
+        }
+
+        .answers{
+            width: 60%;;
+        }
+
+        .btn-group{
+            .icon-add{
+                font-size: 24px;
+                color: #229922;
+                cursor: pointer;
+                opacity: 0.5;
+                &:hover{
+                    opacity: 1;
+                }
+                transition: all ease 0.2s;
+
+            }
+            .icon-delete{
+                margin-left: 10px;
+                font-size: 24px;
+                color: #f21212;
+                cursor: pointer;
+                opacity: 0.5;
+                &:hover{
+                    opacity: 1;
+                }
+                transition: all ease 0.2s;
+            }
+        }
+    }
+   
+}

@@ -9,6 +9,7 @@ const ListQuiz = (props) => {
         fetchListQuiz()
     }, [])
 
+    console.log(arrQuiz)
 
 
     const fetchListQuiz = async () => {

@@ -1,5 +1,4 @@
 import { Route, Routes } from 'react-router-dom'
-import User from './components/User/User';
 import Admin from './components/Admin/Admin';
 import HomePage from './components/Home/HomePage';
 import App from './App';
@@ -12,6 +11,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ListQuiz from './components/User/ListQuiz';
 import DetailQuiz from './components/User/DetailQuiz';
+import ManageQuizs from './components/Admin/Quiz/ManageQuizs';
+import Questions from './components/Admin/Questions/Questions';
 
 
 const NotFound = () => {
@@ -34,6 +35,8 @@ const Layout = () => {
                 <Route path="admins" element={<Admin />}>
                     <Route index element={<Dashboard />} />
                     <Route path="manage-users" element={<ManageUsers />} />
+                    <Route path="manage-quizs" element={<ManageQuizs />} />
+                    <Route path="manage-questions" element={<Questions />} />
                 </Route>
                 <Route path="login" element={<Auth
                     loginType

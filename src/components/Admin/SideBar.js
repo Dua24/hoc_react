@@ -54,8 +54,12 @@ const SideBar = (props) => {
                             <Link to="manage-users" />
                             Manage User
                         </MenuItem>
-                        <MenuItem>Manage Quiz</MenuItem>
-                        <MenuItem>Manage Answer</MenuItem>
+                        <MenuItem>
+                            <Link to="manage-quizs" />
+                            Manage Quiz</MenuItem>
+                        <MenuItem>
+                            <Link to="manage-questions" />
+                            Manage Answer</MenuItem>
                     </SubMenu>
                 </Menu>
             </SidebarContent>
@@ -78,7 +82,7 @@ const SideBar = (props) => {
                     </a>
                 </div>
             </SidebarFooter>
-        </ProSidebar>
+        </ProSidebar >
     )
 }
 

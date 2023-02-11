@@ -51,4 +51,44 @@ const getQuestionByQuizId = (quizId) => {
 const postSubmitQuiz = (data) => {
     return axios.post(`api/v1/quiz-submit`, { ...data }) //<-- truyen theo row
 }
-export { createUser, getAllUsers, deleteUser, updateUser, getUsersWithPaginate, login, register, getQuizByUser, getQuestionByQuizId, postSubmitQuiz } 
+
+
+const postQuiz = (name, description, difficulty, quizImage) => {
+    const data = new FormData()
+    data.append('name', name)
+    data.append('description', description)
+    data.append('difficulty', difficulty)
+    data.append('quizImage', quizImage)
+    return axios.post('api/v1/quiz', data)
+}
+
+const postAssignQuizToUser = (quizId, userId) => {
+    return axios.post('api/v1/quiz-assign-to-user',
+        {
+            quizId,
+            userId,
+        })
+}
+
+const getAllQuiz = () => {
+    return axios.get(`api/v1/quiz/all`)
+}
+
+const updateQuiz = (id, description, name, difficulty, quizImage) => {
+    const data = new FormData()
+    data.append('id', id)
+    data.append('description', description)
+    data.append('name', name)
+    data.append('difficulty', difficulty)
+    data.append('quizImage', quizImage)
+    return axios.put('api/v1/quiz', data) // truyen form data
+}
+const deleteQuiz = (id) => {
+    return axios.delete(`api/v1/quiz/${id}`)
+}
+
+export {
+    createUser, getAllUsers, deleteUser, updateUser, getUsersWithPaginate,
+    login, register, getQuizByUser, getQuestionByQuizId, postSubmitQuiz,
+    postQuiz, postAssignQuizToUser, getAllQuiz, updateQuiz, deleteQuiz
+} 
