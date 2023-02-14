@@ -46,6 +46,7 @@ body {
   }
 
   .app-contain{
+    height: calc(100vh - 60px);
     .homepage-container{
       .homepage-content{
         padding: 100px;

@@ -7,6 +7,8 @@ import QuizTable from "./QuizTable";
 import Accordion from 'react-bootstrap/Accordion';
 import ModalUpdateQuiz from "./ModalUpdateQuiz";
 import ModalDeleteQuiz from "./ModalDeleteQuiz";
+import QAQuiz from "./QAQuiz";
+import AssignQuiz2User from "./AssignQuiz2User";
 
 const ManageQuizs = (props) => {
     const [name, setName] = useState("")
@@ -45,7 +47,6 @@ const ManageQuizs = (props) => {
         const res = await postQuiz(name, description, level, image)
         if (res && res.EC === 0) {
             toast.success(res.EM)
-            console.log(res)
             setName("")
             setDescription("")
             setLevel("EASY")
@@ -133,17 +134,30 @@ const ManageQuizs = (props) => {
                                     <button onClick={() => handleSaveQuiz()} className="btn btn-warning">Save</button>
                                 </div>
                             </fieldset>
+                            <div className="quiz-table">
+                                <QuizTable
+                                    listAllQuiz={listAllQuiz}
+                                    handleClickBtnUpdateQuiz={handleClickBtnUpdateQuiz}
+                                    handleClickBtnDeleteQuiz={handleClickBtnDeleteQuiz}
+                                />
+                            </div>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="1">
+                        <Accordion.Header>Update Q/A Quiz</Accordion.Header>
+                        <Accordion.Body>
+                            <QAQuiz />
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="2">
+                        <Accordion.Header>Assign quiz 2 user</Accordion.Header>
+                        <Accordion.Body>
+                            <AssignQuiz2User />
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
             </div>
-            <div className="quiz-table">
-                <QuizTable
-                    listAllQuiz={listAllQuiz}
-                    handleClickBtnUpdateQuiz={handleClickBtnUpdateQuiz}
-                    handleClickBtnDeleteQuiz={handleClickBtnDeleteQuiz}
-                />
-            </div>
+
             <ModalUpdateQuiz
                 dataUpdateQuiz={dataUpdateQuiz}
                 setDataUpdateQuiz={setDataUpdateQuiz}

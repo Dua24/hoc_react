@@ -5,6 +5,8 @@ import _ from 'lodash';
 import "./DetailQuiz.scss"
 import Question from './Question';
 import ModalResult from './ModalResult';
+import RightContent from './Content/RightContent';
+
 
 const DetailQuiz = (props) => {
     const { quizId } = useParams()
@@ -13,25 +15,24 @@ const DetailQuiz = (props) => {
     const [indexQuestion, setIndexQuestion] = useState(0)
     const [isShowModalResult, setIsShowModalResult] = useState(false)
     const [dataModalResult, setDataModalResult] = useState({})
+    const [answerChecked, setAnswerChecked] = useState(false)
+
     useEffect(() => {
         fetchQuestionByQuizId()
     }, [])
     const handleNext = () => {
         if (dataQuiz.length > indexQuestion + 1)
             setIndexQuestion(indexQuestion + 1)
-
-
     }
     const handlePrev = () => {
         if (indexQuestion !== 0) {
             setIndexQuestion(indexQuestion - 1)
-
         }
     }
 
     const handleCheckBox = (answId, idQuestion) => {
         const dataQuizClone = _.cloneDeep(dataQuiz)
-        dataQuizClone.filter((question) => {
+        dataQuizClone.filter((question, index) => {
             if (question.questionId === idQuestion) {
                 question.answer.find((a) => {
                     if (a.id === answId) {
@@ -126,7 +127,13 @@ const DetailQuiz = (props) => {
                     <button onClick={() => handleSubmitAnswer()} className="btn btn-warning">Finish</button>
                 </div>
             </div>
-            <div className="right-content">Clock count down</div>
+            <div className="right-content">
+                <RightContent
+                    dataQuiz={dataQuiz}
+                    handleSubmitAnswer={handleSubmitAnswer}
+                    setIndexQuestion={setIndexQuestion}
+                />
+            </div>
             <ModalResult
                 show={isShowModalResult}
                 setShow={setIsShowModalResult}

@@ -1,21 +1,25 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import "./Questions.scss"
+import "./QAQuiz.scss"
 import { BsFillPatchPlusFill, BsPatchMinusFill } from "react-icons/bs"
 import { AiFillPlusSquare, AiOutlineMinusCircle } from 'react-icons/ai';
 import { BiImageAdd } from "react-icons/bi"
 import { v4 as uuidv4 } from 'uuid';
 import _ from "lodash"
 import Lightbox from "react-awesome-lightbox";
-import { getAllQuiz, postAnswersforQuestion, postQuestionforQuiz } from "../../../services/apiServices";
+import {
+    getAllQuiz, getQuizWithQA,
+    postUpSertQAforQuiz
+}
+    from "../../../services/apiServices";
 import { toast } from 'react-toastify';
 
-const Questions = (props) => {
+const QAQuiz = (props) => {
     const initListuestions = [
         {
             id: uuidv4(),
             description: "",
-            image: "",
+            imageFile: "",
             imageName: "",
             answers: [
                 {
@@ -39,6 +43,43 @@ const Questions = (props) => {
         handleGetListAllQuiz()
     }, [])
 
+    useEffect(() => {
+        fetchGetQuizWithQA()
+    }, [selectedQuiz])
+
+    //return a promise that resolves with a File instance
+    const urltoFile = (url, filename, mimeType) => {
+        return (fetch(url)
+            .then(function (res) { return res.arrayBuffer(); })
+            .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
+        );
+    }
+
+
+    const fetchGetQuizWithQA = async () => {
+        if (selectedQuiz && selectedQuiz.value) {
+            const newData = []
+            const res = await getQuizWithQA(selectedQuiz.value)
+            if (res.EC === 0) {
+                if (res.DT.qa && res.DT.qa.length !== 0) {
+                    for (let i = 0; i < res.DT.qa.length; i++) {
+                        if (res.DT.qa[i].imageFile) {
+                            res.DT.qa[i].imageFile = await urltoFile(`data:image/png;base64,${res.DT.qa[i].imageFile}`, `q'Img-${res.DT.qa[i].id}`, 'image/jpg')
+                            res.DT.qa[i].imageName = `Q's Imgage-${res.DT.qa[i].id}`
+                        }
+                        newData.push(res.DT.qa[i])
+                    }
+                    setListQuestion(newData)
+                } else {
+                    setListQuestion(initListuestions)
+                }
+
+            }
+        }
+
+
+    }
+
     const handleGetListAllQuiz = async () => {
         const res = await getAllQuiz()
         if (res && res.EC === 0) {
@@ -59,7 +100,7 @@ const Questions = (props) => {
             const newQuestion = {
                 id: uuidv4(),
                 description: "",
-                image: "",
+                imageFile: "",
                 answers: [
                     {
                         id: uuidv4(),
@@ -126,16 +167,16 @@ const Questions = (props) => {
     const handleOnChangeFile = (id, value) => {
         let cloneListQuestion = _.cloneDeep(listQuestion)
         const index = cloneListQuestion.findIndex((item) => item.id === id)
-        cloneListQuestion[index].image = value
+        cloneListQuestion[index].imageFile = value
         cloneListQuestion[index].imageName = value.name
         setListQuestion(cloneListQuestion)
     }
 
-    const handleSetPreview = (image, imageName) => {
-        if (image) {
+    const handleSetPreview = (imageFile, imageName) => {
+        if (imageFile) {
             setPreviewImg(true)
             setDataPreviewImg({
-                image: URL.createObjectURL(image),
+                imageFile: URL.createObjectURL(imageFile),
                 imageName
             })
         }
@@ -163,8 +204,6 @@ const Questions = (props) => {
 
         }
 
-        // Nếu cần dùng loop + callApi -> use for(leti=0;i<length,i++) loop
-
         // c1
         // await Promise.all(listQuestion.map(async (question) => {
         //     const q = await postQuestionforQuiz(selectedQuiz.value, question.description, question.image)
@@ -175,16 +214,37 @@ const Questions = (props) => {
         // })) <-- cái này k chắc chắn sẽ chạy theo trình tự, Promise.all() chỉ sure chạy nhanh nhất
 
         // c2
-        for (const question of listQuestion) {
-            const q = await postQuestionforQuiz(selectedQuiz.value, question.description, question.image)
-            for (const answer of question.answers) {
-                await postAnswersforQuestion(answer.description, answer.isCorrect, q.DT.id)
+
+        let cloneListQuestion = _.cloneDeep(listQuestion);
+        for (let i = 0; i < cloneListQuestion.length; i++) {
+            if (cloneListQuestion[i].imageFile) {
+                cloneListQuestion[i].imageFile = await toBase64(cloneListQuestion[i].imageFile)
             }
         }
 
+        let res = await postUpSertQAforQuiz({
+            quizId: selectedQuiz.value,
+            questions: cloneListQuestion
+        })
+
+
+        if (res && res.EC == 0) {
+            toast.success(res.EM)
+        } else {
+            toast.error(res.EM)
+        }
+
         setListQuestion(initListuestions)
+
     }
 
+
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
 
 
     return (
@@ -194,7 +254,7 @@ const Questions = (props) => {
                 <div className="col-6 form-group">
                     <label>Select Quiz</label>
                     <Select
-                        defaultValue={selectedQuiz}
+                        defaultValue={selectedQuiz.label}
                         onChange={setSelectedQuiz}
                         options={listQuiz}
                     />
@@ -225,7 +285,7 @@ const Questions = (props) => {
                                             type="file"
                                             onChange={(e) => handleOnChangeFile(question.id, e.target.files[0])}
                                         />
-                                        <label onClick={() => handleSetPreview(question.image, question.imageName)}> {question.imageName ? question.imageName : '0 file choosen'}</label>
+                                        <label onClick={() => handleSetPreview(question.imageFile, question.imageName)}> {question.imageName ? question.imageName : '0 file choosen'}</label>
 
 
                                     </div>
@@ -252,7 +312,7 @@ const Questions = (props) => {
                                             <input
                                                 className="form-check-input isCorrect"
                                                 type="checkbox"
-                                                value={answ.isCorrect}
+                                                checked={answ.isCorrect}
                                                 onChange={(e) => handleOnChange("CHECKBOX", question.id, answ.id, e.target.checked, indexQuestion)}
                                             />
                                             <div className="form-floating answers">
@@ -294,7 +354,7 @@ const Questions = (props) => {
                     }
                     {previewImg &&
                         <Lightbox
-                            image={dataPreviewImg.image}
+                            image={dataPreviewImg.imageFile}
                             title={dataPreviewImg.imageName}
                             onClose={() => setPreviewImg(false)}
                         ></Lightbox>}
@@ -304,4 +364,4 @@ const Questions = (props) => {
     )
 }
 
-export default Questions
+export default QAQuiz

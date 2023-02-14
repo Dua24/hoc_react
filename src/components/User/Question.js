@@ -1,7 +1,10 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import _ from "lodash"
+import Lightbox from "react-awesome-lightbox";
 const Question = (props) => {
     const { dataQuiz, indexQuestion } = props
+
+    const [previewImg, setPreviewImg] = useState(false)
     if (_.isEmpty(dataQuiz)) {
         return (<></>)
     }
@@ -12,7 +15,7 @@ const Question = (props) => {
     return (
         <>
             {dataQuiz.image ?
-                <div className="q-image">
+                <div onClick={() => setPreviewImg(true)} className="q-image">
                     <img src={`data:image/png;base64, ${dataQuiz.image}`} alt="..." />
                 </div>
                 :
@@ -43,7 +46,12 @@ const Question = (props) => {
 
                     )}
             </div>
-
+            {previewImg &&
+                <Lightbox
+                    image={`data:image/png;base64, ${dataQuiz.image}`}
+                    title={"Question image"}
+                    onClose={() => setPreviewImg(false)}
+                ></Lightbox>}
 
         </>
     )
