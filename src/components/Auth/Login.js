@@ -2,8 +2,6 @@ import "./Auth.scss"
 import { FaFacebookSquare, FaInstagramSquare, FaTwitterSquare, FaGithubSquare } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-
-
 const Login = (props) => {
     const navigate = useNavigate()
 
@@ -12,6 +10,7 @@ const Login = (props) => {
     }
     return (
         <div className="auth-container">
+
             <form>
                 <h2 className="title mb-4">LOGIN</h2>
                 <div className="form-outline mb-4">

@@ -81,7 +81,7 @@ const updateQuiz = (id, description, name, difficulty, quizImage) => {
     data.append('name', name)
     data.append('difficulty', difficulty)
     data.append('quizImage', quizImage)
-    return axios.put('api/v1/quiz', data) // truyen form data
+    return axios.put('api/v1/quiz', data)
 }
 const deleteQuiz = (id) => {
     return axios.delete(`api/v1/quiz/${id}`)
@@ -91,23 +91,30 @@ const postQuestionforQuiz = (quiz_id, description, questionImage) => {
     data.append('quiz_id', quiz_id)
     data.append('description', description)
     data.append('questionImage', questionImage)
-    return axios.post('api/v1/question', data) // truyen form data
+    return axios.post('api/v1/question', data)
 }
 const postAnswersforQuestion = (description, correct_answer, question_id) => {
-    return axios.post('api/v1/answer', { description, correct_answer, question_id }) // truyen form data
+    return axios.post('api/v1/answer', { description, correct_answer, question_id })
 }
 
 const postAssginQuiz2User = (quizId, userId) => {
-    return axios.post('api/v1/quiz-assign-to-user', { quizId, userId }) // truyen form data
+    return axios.post('api/v1/quiz-assign-to-user', { quizId, userId })
 }
 
 const getQuizWithQA = (quizId) => {
-    return axios.get(`api/v1/quiz-with-qa/${quizId}`) // truyen form data
+    return axios.get(`api/v1/quiz-with-qa/${quizId}`)
 }
 
 const postUpSertQAforQuiz = (data) => {
-    console.log(data)
     return axios.post('api/v1/quiz-upsert-qa', { ...data })
+}
+
+const logOut = (email, refresh_token) => {
+    return axios.post('api/v1/logout', { email, refresh_token })
+}
+
+const getDashBoardOverview = () => {
+    return axios.get('api/v1/overview')
 }
 
 export {
@@ -115,5 +122,5 @@ export {
     login, register, getQuizByUser, getQuestionByQuizId, postSubmitQuiz,
     postQuiz, postAssignQuizToUser, getAllQuiz, updateQuiz, deleteQuiz,
     postQuestionforQuiz, postAnswersforQuestion, postAssginQuiz2User,
-    getQuizWithQA, postUpSertQAforQuiz
+    getQuizWithQA, postUpSertQAforQuiz, logOut, getDashBoardOverview
 } 

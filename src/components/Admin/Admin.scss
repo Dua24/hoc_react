@@ -7,12 +7,57 @@
         width: 100%;
         .admin-header-content{
             height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #00000029;
+            padding: 28px 10px;
+}
             .sidebarIcon{
+                display: flex;
+                align-items: center;
                 font-size: 30px;
             }
         }
         .admin-main{
-            height: calc(100vh - 40px)
+            height: calc(100vh - 40px);
+            padding: 16px 10px;
+            .dashboard-title{
+                font-size: 20px;
+                font-weight: 600;
+                text-align:center;
+                margin-bottom: 30px;
+            }
+            .dashboard-content{
+                display: flex;
+                .l-board{
+                    width: 50%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap:15px;
+                    justify-content: center;
+                    .child{
+                        width: calc(50% - 30px);
+                        border: 1px solid #ccc;
+                        height: 200px;
+                        border-radius: 15px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        .text-2{
+                            font-size: 30px;
+                            font-weight: 500;
+                        }
+                    }
+                }
+                .r-board{
+                    width: 50%;
+                    display: flex;
+                    justify-content: center;
+
+                }
+            }
         }
         
         .users-content{
@@ -22,7 +67,7 @@
             }
         }
     }
-}
+
 .modal-content{
     .img-preview-input{
         height: 150px;

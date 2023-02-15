@@ -40,7 +40,7 @@ const SideBar = (props) => {
                     <MenuItem
                         icon={<FaTachometerAlt />}
                     >
-                        <Link to="/" />
+                        <Link to="/admins" />
                         Dashboard
                     </MenuItem>
                     <MenuItem icon={<FaGem />}> Components</MenuItem>

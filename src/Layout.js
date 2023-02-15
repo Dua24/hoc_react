@@ -13,8 +13,8 @@ import ListQuiz from './components/User/ListQuiz';
 import DetailQuiz from './components/User/DetailQuiz';
 import ManageQuizs from './components/Admin/Quiz/ManageQuizs';
 import Questions from './components/Admin/Questions/Questions';
-
-
+import ProtectedRoute from './routes/ProtectedRoute';
+import { Suspense } from 'react'
 const NotFound = () => {
     return (
         <div className="alert alert-danger container">Not found data with current URL</div>
@@ -23,16 +23,24 @@ const NotFound = () => {
 
 const Layout = () => {
     return (
-        <>
+        <Suspense fallback={<div>Loading... </div>}>
             <Routes>
 
                 <Route path="/" element={<App />}>
                     <Route index element={<HomePage />} />
-                    <Route path="users" element={<ListQuiz />} />
+                    <Route path="users" element={
+                        <ProtectedRoute>
+                            <ListQuiz />
+                        </ProtectedRoute>
+                    } />
                 </Route>
                 <Route path="quiz/:quizId" element={<DetailQuiz />} />
 
-                <Route path="admins" element={<Admin />}>
+                <Route path="admins" element={
+                    <ProtectedRoute>
+                        <Admin />
+                    </ProtectedRoute>
+                }>
                     <Route index element={<Dashboard />} />
                     <Route path="manage-users" element={<ManageUsers />} />
                     <Route path="manage-quizs" element={<ManageQuizs />} />
@@ -60,7 +68,7 @@ const Layout = () => {
                 pauseOnHover
                 theme="light"
             />
-        </>
+        </Suspense>
     )
 }
 

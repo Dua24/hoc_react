@@ -1,0 +1,21 @@
+{
+    "homepage": {
+        "title1": "Có 1 cách tốt hơn để hỏi",
+        "title2": "Bạn muốn sáng tạo 1 form mới mẻ hơn ? Hãy tạo 1 typeform và khiến mọi người bất ngờ",
+        "title3": {
+            "button1": "Làm bài ngay",
+            "button2": "Bắt đầu thôi - Miễn phí đấy"
+        }
+    },
+    "header": {
+        "nav-link1": "Trang chủ",
+        "nav-link2": "Người dùng",
+        "nav-link3": "Quản trị",
+        "nav-userAction": {
+            "btnLogin": "Đăng nhập",
+            "btnSignUp": "Đăng ký",
+            "btnProfile": "Hồ sơ",
+            "btnLogOut": "Đăng xuất"
+        }
+    }
+}

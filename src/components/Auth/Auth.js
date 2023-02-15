@@ -8,7 +8,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useDispatch } from "react-redux"
 import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner10 } from "react-icons/im";
-
+import Language from "../Header/Language";
 
 const Auth = (props) => {
     const { loginType, registerType } = props
@@ -44,7 +44,8 @@ const Auth = (props) => {
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             );
     };
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         if (!validateEmail(email)) {
             toast.error("Invalid Email")
             return;
@@ -77,126 +78,132 @@ const Auth = (props) => {
         }
     }
     return (
-        <div className="auth-container">
-            <form onSubmit={(e) => e.preventDefault()} >
-                <h2 className="title mb-4">{registerType ? 'Register' : 'Login'}</h2>
-                <div className="form-outline mb-4">
-                    <label className="form-label" htmlFor="form2Example1">Email address:</label>
-                    <input
-                        type="text"
-                        id="form2Example1"
-                        className="form-control"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+        <>
+
+            <div className="auth-container">
+                <div className="headerAuth">
+                    <Language />
                 </div>
-                {
-                    registerType &&
+                <form onSubmit={(e) => handleSubmit(e)} >
+                    <h2 className="title mb-4">{registerType ? 'Register' : 'Login'}</h2>
                     <div className="form-outline mb-4">
-                        <label className="form-label" htmlFor="form2Example2">Username:</label>
+                        <label className="form-label" htmlFor="form2Example1">Email address:</label>
                         <input
                             type="text"
-                            id="form2Example2"
+                            id="form2Example1"
                             className="form-control"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-                }
-                <div className="form-outline mb-4">
-                    <label className="form-label" htmlFor="form2Example2">Password:</label>
-                    <div className="wrapPasswordToggle">
-                        <input
-
-                            type={showPassword ? "text" : "password"}
-                            id="form2Example2"
-                            className="form-control"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            onPaste={(e) => e.preventDefault()}
-                        />
-                        <span onClick={() => handleTogglePassword()}>
-                            {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
-                        </span>
-                    </div>
-                </div>
-                {
-                    registerType &&
-
+                    {
+                        registerType &&
+                        <div className="form-outline mb-4">
+                            <label className="form-label" htmlFor="form2Example2">Username:</label>
+                            <input
+                                type="text"
+                                id="form2Example2"
+                                className="form-control"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </div>
+                    }
                     <div className="form-outline mb-4">
-                        <label className="form-label" htmlFor="form2Example2">Confirm Password:</label>
-                        <input
-                            type="password"
-                            id="form2Example2"
-                            className="form-control"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        <label className="form-label" htmlFor="form2Example2">Password:</label>
+                        <div className="wrapPasswordToggle">
+                            <input
 
-
-                        />
+                                type={showPassword ? "text" : "password"}
+                                id="form2Example2"
+                                className="form-control"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                onPaste={(e) => e.preventDefault()}
+                            />
+                            <span onClick={() => handleTogglePassword()}>
+                                {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                            </span>
+                        </div>
                     </div>
-                }
+                    {
+                        registerType &&
 
-                <button
-                    onClick={() => handleSubmit()}
-                    className="btn btn-primary btn-block mb-4 auth"
-                    disabled={loadingIcon ? true : false}
-                >
-                    <span>
-                        {loadingIcon && <ImSpinner10 className="loader-icon" />}
+                        <div className="form-outline mb-4">
+                            <label className="form-label" htmlFor="form2Example2">Confirm Password:</label>
+                            <input
+                                type="password"
+                                id="form2Example2"
+                                className="form-control"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
 
-                        <span>{registerType ? "Register" : "Login"}</span>
-                    </span>
-                </button>
 
-                <div className="row mb-4">
-                    {!registerType &&
-                        <>
-                            <div className="col-6 d-flex mb-2">
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="" id="form2Example31" />
-                                    <label className="form-check-label" htmlFor="form2Example31"> Remember me </label>
+                            />
+                        </div>
+                    }
+
+                    <button
+                        type="submit"
+                        className="btn btn-primary btn-block mb-4 auth"
+                        disabled={loadingIcon ? true : false}
+                    >
+                        <span>
+                            {loadingIcon && <ImSpinner10 className="loader-icon" />}
+
+                            <span>{registerType ? "Register" : "Login"}</span>
+                        </span>
+                    </button>
+
+                    <div className="row mb-4">
+                        {!registerType &&
+                            <>
+                                <div className="col-6 d-flex mb-2">
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="checkbox" value="" id="form2Example31" />
+                                        <label className="form-check-label" htmlFor="form2Example31"> Remember me </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-1"></div>
-                            <div className="col-6">
-                                <a href="#!">Forgot password?</a>
-                            </div>
-                        </>
-                    }
+                                <div className="col-1"></div>
+                                <div className="col-6">
+                                    <a href="#!">Forgot password?</a>
+                                </div>
+                            </>
+                        }
 
 
-                </div>
+                    </div>
 
 
-                <div className="text-center">
-                    {registerType ?
-                        <p onClick={() => handleClickBtnLogin()}>Had account? <span>Sign in</span> </p>
-                        :
-                        <p onClick={() => handleClickBtnRegister()}>Not a member? <span>Register</span> </p>
+                    <div className="text-center">
+                        {registerType ?
+                            <p onClick={() => handleClickBtnLogin()}>Had account? <span>Sign in</span> </p>
+                            :
+                            <p onClick={() => handleClickBtnRegister()}>Not a member? <span>Register</span> </p>
 
-                    }
+                        }
 
-                    <p>{registerType ? 'or sign up with:' : 'or login with'}</p>
-                    <button type="button" className="btn btn-link btn-floating mx-1">
-                        <FaFacebookSquare />
-                    </button>
+                        <p>{registerType ? 'or sign up with:' : 'or login with'}</p>
+                        <button type="button" className="btn btn-link btn-floating mx-1">
+                            <FaFacebookSquare />
+                        </button>
 
-                    <button type="button" className="btn btn-link btn-floating mx-1">
-                        <FaInstagramSquare />
-                    </button>
+                        <button type="button" className="btn btn-link btn-floating mx-1">
+                            <FaInstagramSquare />
+                        </button>
 
-                    <button type="button" className="btn btn-link btn-floating mx-1">
-                        <FaTwitterSquare />
-                    </button>
+                        <button type="button" className="btn btn-link btn-floating mx-1">
+                            <FaTwitterSquare />
+                        </button>
 
-                    <button type="button" className="btn btn-link btn-floating mx-1">
-                        <FaGithubSquare />
-                    </button>
-                </div>
-            </form >
+                        <button type="button" className="btn btn-link btn-floating mx-1">
+                            <FaGithubSquare />
+                        </button>
+                    </div>
+                </form >
 
-        </div >
+            </div >
+        </>
     )
 }
 

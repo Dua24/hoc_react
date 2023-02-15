@@ -1,0 +1,21 @@
+{
+    "homepage": {
+        "title1": "There's a better way to ask",
+        "title2": "You don't want to make a boring form. And your audience won't answer one. Create a typeform instead—and make everyone happy.",
+        "title3": {
+            "button1": "Doing Quiz Now",
+            "button2": "Get started - it's free"
+        }
+    },
+    "header": {
+        "nav-link1": "Home",
+        "nav-link2": "User",
+        "nav-link3": "Admin",
+        "nav-userAction": {
+            "btnLogin": "Log in",
+            "btnSignUp": "Sign up",
+            "btnProfile": "Profile",
+            "btnLogOut": "Log out"
+        }
+    }
+}

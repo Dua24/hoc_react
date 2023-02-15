@@ -30,7 +30,7 @@ const QAQuiz = (props) => {
             ]
         }
     ]
-
+    console.log("a")
     const [selectedQuiz, setSelectedQuiz] = useState({})
 
     const [listQuestion, setListQuestion] = useState(initListuestions)

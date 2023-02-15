@@ -5,16 +5,33 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useDispatch } from "react-redux"
+import { logOut } from "../../services/apiServices"
+import { doLogout } from "../../redux/action/userAction.js"
+import Language from './Language';
+import { useTranslation, Trans } from 'react-i18next';
 const Header = () => {
+    const { isAuthenticated, account } = useSelector(state => state.user)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { t } = useTranslation();
     const handleClickBtnLogin = () => {
         navigate("/login")
     }
     const handleClickBtnRegister = () => {
         navigate("/register")
     }
-
-    const { isAuthenticated, account } = useSelector(state => state.user)
+    const handleLogOut = async () => {
+        const res = await logOut(account.email, account.refresh_token)
+        if (res.EC == 0) {
+            toast.success(res.EM)
+            dispatch(doLogout(res))
+            navigate("/")
+        } else {
+            toast.error(res.EM)
+        }
+    }
     // const account = useSelector(state => state.user.account)
 
     return (
@@ -24,23 +41,24 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <NavLink className="nav-link" to="/">Home</NavLink>
-                        <NavLink className="nav-link" to="/users">Users</NavLink>
-                        <NavLink className="nav-link" to="/admins">Admin</NavLink>
+                        <NavLink className="nav-link" to="/">{t('header.nav-link1')}</NavLink>
+                        <NavLink className="nav-link" to="/users">{t('header.nav-link2')}</NavLink>
+                        <NavLink className="nav-link" to="/admins">{t('header.nav-link3')}</NavLink>
                     </Nav>
-                    <Nav>
+                    <Nav className="nav-logInOut">
                         {!isAuthenticated ?
                             <>
-                                <button onClick={() => handleClickBtnLogin()} className="btn-login">Log in</button>
-                                <button onClick={() => handleClickBtnRegister()} className="btn-signup">Sign up</button>
+                                <button onClick={() => handleClickBtnLogin()} className="btn-login">{t('header.nav-userAction.btnLogin')}</button>
+                                <button onClick={() => handleClickBtnRegister()} className="btn-signup">{t('header.nav-userAction.btnSignUp')}</button>
                             </>
                             :
                             <NavDropdown title="Settings" id="basic-nav-dropdown">
-                                <NavDropdown.Item >Log out</NavDropdown.Item>
-                                <NavDropdown.Item >Profile</NavDropdown.Item>
+                                <NavDropdown.Item >{t('header.nav-userAction.btnProfile')}</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => handleLogOut()}>{t('header.nav-userAction.btnLogOut')}</NavDropdown.Item>
                             </NavDropdown>
 
                         }
+                        <Language />
 
                     </Nav>
                 </Navbar.Collapse>
