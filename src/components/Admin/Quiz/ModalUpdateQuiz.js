@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import _ from "lodash"
 import { updateQuiz } from '../../../services/apiServices';
+import { useTranslation, Trans } from 'react-i18next';
 
 const ModalUpdateQuiz = (props) => {
     const { show, setShow, dataUpdateQuiz } = props
@@ -15,6 +16,7 @@ const ModalUpdateQuiz = (props) => {
     const [difficulty, setDifficulty] = useState("EASY")
     const [image, setImage] = useState("")
     const [imgPreview, setImgPreview] = useState("")
+    const { t } = useTranslation();
 
     const handlePreviewImg = (e) => {
         if (e.target && e.target.files[0]) {

@@ -9,6 +9,7 @@ import ModalUpdateQuiz from "./ModalUpdateQuiz";
 import ModalDeleteQuiz from "./ModalDeleteQuiz";
 import QAQuiz from "./QAQuiz";
 import AssignQuiz2User from "./AssignQuiz2User";
+import { useTranslation, Trans } from 'react-i18next';
 
 const ManageQuizs = (props) => {
     const [name, setName] = useState("")
@@ -20,6 +21,8 @@ const ManageQuizs = (props) => {
     const [dataUpdateQuiz, setDataUpdateQuiz] = useState({})
     const [showModalUpdateQuiz, setShowModalUpdateQuiz] = useState(false)
     const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false)
+    const { t } = useTranslation();
+
     useEffect(() => {
         handleGetListAllQuiz()
     }, [])
@@ -81,12 +84,12 @@ const ManageQuizs = (props) => {
             <div className="manage-quizs-content">
                 <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header>Manage Quizzes</Accordion.Header>
+                        <Accordion.Header>{t('admin.manageQuiz.label1.title')}</Accordion.Header>
                         <Accordion.Body>
                             <fieldset className="border rounded-3 p-3 row" legend="true" >
-                                <legend className="float-none w-auto px-3 ">Create Quiz</legend>
+                                <legend className="float-none w-auto px-3 ">{t('admin.manageQuiz.label1.header')}</legend>
                                 <div className="control-group col-12">
-                                    <label className="form-label mb-1">Name</label>
+                                    <label className="form-label mb-1">{t('admin.manageQuiz.label1.input1')}</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -95,7 +98,7 @@ const ManageQuizs = (props) => {
                                     />
                                 </div>
                                 <div className="control-group col-12">
-                                    <label className="form-label mb-1">Description</label>
+                                    <label className="form-label mb-1">{t('admin.manageQuiz.label1.input2')}</label>
                                     <input
                                         type="text"
                                         className="form-control"
@@ -105,19 +108,19 @@ const ManageQuizs = (props) => {
                                 </div>
 
                                 <div className="control-group col-12">
-                                    <label className="form-label mb-1">Level</label>
+                                    <label className="form-label mb-1">{t('admin.manageQuiz.label1.input3.title')}</label>
                                     <select
                                         className="form-select"
                                         value={level}
                                         onChange={(e) => setLevel(e.target.value)}
                                     >
-                                        <option value="EASY">Easy</option>
-                                        <option value="MEDIUM">Medium</option>
-                                        <option value="HARD">Hard</option>
+                                        <option value="EASY">{t('admin.manageQuiz.label1.input3.value1')}</option>
+                                        <option value="MEDIUM">{t('admin.manageQuiz.label1.input3.value2')}</option>
+                                        <option value="HARD">{t('admin.manageQuiz.label1.input3.value3')}</option>
                                     </select>
                                 </div>
                                 <div className="control-group col-3">
-                                    <label htmlFor="imgPre" className="form-label mb-1 imgPreLable"><FcPlus /> Upload File Image</label>
+                                    <label htmlFor="imgPre" className="form-label mb-1 imgPreLable"><FcPlus /> {t('admin.manageQuiz.label1.input4')}</label>
                                     <input
                                         id="imgPre"
                                         hidden type="file"
@@ -127,11 +130,11 @@ const ManageQuizs = (props) => {
 
                                 <div className="mb-5 img-preview-input col-12">
 
-                                    {imgPreview ? <img src={imgPreview} /> : <span>Preview image</span>}
+                                    {imgPreview ? <img src={imgPreview} /> : <span>{t('admin.manageQuiz.label1.input5')}</span>}
 
                                 </div>
                                 <div>
-                                    <button onClick={() => handleSaveQuiz()} className="btn btn-warning">Save</button>
+                                    <button onClick={() => handleSaveQuiz()} className="btn btn-warning">{t('admin.manageQuiz.label1.btnSave')}</button>
                                 </div>
                             </fieldset>
                             <div className="quiz-table">
@@ -144,13 +147,13 @@ const ManageQuizs = (props) => {
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="1">
-                        <Accordion.Header>Update Q/A Quiz</Accordion.Header>
+                        <Accordion.Header>{t('admin.manageQuiz.label2.title')}</Accordion.Header>
                         <Accordion.Body>
                             <QAQuiz />
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="2">
-                        <Accordion.Header>Assign quiz 2 user</Accordion.Header>
+                        <Accordion.Header>{t('admin.manageQuiz.label3.title')}</Accordion.Header>
                         <Accordion.Body>
                             <AssignQuiz2User />
                         </Accordion.Body>

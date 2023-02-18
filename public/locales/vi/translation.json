@@ -12,6 +12,7 @@
         "nav-link2": "Người dùng",
         "nav-link3": "Quản trị",
         "nav-userAction": {
+            "title": "Cài đặt",
             "btnLogin": "Đăng nhập",
             "btnSignUp": "Đăng ký",
             "btnProfile": "Hồ sơ",
@@ -27,7 +28,7 @@
                 "title": "Quản trị",
                 "manageFunc1": "Quản lý người dùng",
                 "manageFunc2": "Quản lý bài thi",
-                "manageFunc3": "Quản lý đáp án"
+                "manageFunc3": "Quản lý câu hỏi"
             }
         },
         "dashboard": {
@@ -59,8 +60,10 @@
                 }
             },
             "modal": {
-                "create": {
-                    "title": "Thêm mới người dùng",
+                "view&create&update": {
+                    "titleCreate": "Thêm mới người dùng",
+                    "titleView": "Xem người dùng",
+                    "titleUpdate": "Cập nhật người dùng",
                     "input1": "Email",
                     "input2": "Mật khẩu",
                     "input3": "Tên đăng nhập",
@@ -72,9 +75,77 @@
                     "input5": "Tải ảnh lên",
                     "input6": "Xem trước ảnh",
                     "btnClose": "Đóng",
-                    "btnCreate": "Tạo mới"
+                    "btnCreate": "Tạo mới",
+                    "btnUpdate": "Cập nhật"
+                },
+                "delete": {
+                    "title": "Xóa người dùng",
+                    "body": {
+                        "text1": "Bạn có muốn",
+                        "text2": "xóa",
+                        "text3": "email người dùng",
+                        "btnClose": "Đóng",
+                        "btnDelete": "Xóa"
+                    }
                 }
             }
+        },
+        "manageQuiz": {
+            "label1": {
+                "title": "Quản lý bài thi",
+                "header": "Tạo mới bài thi",
+                "input1": "Tên bài thi",
+                "input2": "Mô tả",
+                "input3": {
+                    "title": "Mức độ",
+                    "value1": "Dễ",
+                    "value2": "Trung bình",
+                    "value3": "Khó"
+                },
+                "input4": "Tải ảnh lên",
+                "input5": "Xem trước ảnh tải lên",
+                "btnSave": "Lưu",
+                "tableQuiz": {
+                    "thead": {
+                        "col1": "STT",
+                        "col2": "Tên",
+                        "col3": "Mô tả",
+                        "col4": "Mức độ",
+                        "col5": "Hành động"
+                    },
+                    "tbody": {
+                        "btnUpdate": "Cập nhật",
+                        "btnDelete": "Xóa"
+                    }
+                }
+            },
+            "label2": {
+                "title": "Cập nhật câu hỏi & câu trả lời",
+                "header": "Quản lý câu hỏi",
+                "input1": "Chọn bài thi",
+                "input2": {
+                    "title": "Thêm mới câu hỏi",
+                    "inputDescr": "Mô tả",
+                    "inputImg": "Không có file được chọn",
+                    "inputAnswDescr": "Mô tả:"
+                },
+                "btnSave": "Lưu"
+            },
+            "label3": {
+                "title": "Gán bài thi cho người dùng",
+                "input1": "Chọn bài thi",
+                "input2": "Chọn người dùng",
+                "btnAssign": "Gán"
+            }
+        },
+        "manageQuestion": {
+            "header": "Quản lý câu hỏi",
+            "input1": "Chọn bài thi",
+            "input2": "Thêm mới câu hỏi:",
+            "input3": "Mô tả",
+            "input4": "Không có file được chọn",
+            "input5": "Mô tả câu trả lời:",
+            "btnSave": "Lưu"
         }
     }
 }

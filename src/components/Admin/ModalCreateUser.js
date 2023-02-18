@@ -68,12 +68,12 @@ const ModalCreateUser = (props) => {
             onHide={handleClose}
             backdrop="static">
             <Modal.Header closeButton>
-                <Modal.Title>{t('admin.manageUser.modal.create.title')}</Modal.Title>
+                <Modal.Title>{t('admin.manageUser.modal.view&create&update.titleCreate')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form className="row g-3">
                     <div className="col-md-6">
-                        <label className="form-label">{t('admin.manageUser.modal.create.input1')}</label>
+                        <label className="form-label">{t('admin.manageUser.modal.view&create&update.input1')}</label>
                         <input
                             type="email"
                             className="form-control"
@@ -82,7 +82,7 @@ const ModalCreateUser = (props) => {
                         />
                     </div>
                     <div className="col-md-6">
-                        <label className="form-label">{t('admin.manageUser.modal.create.input2')}</label>
+                        <label className="form-label">{t('admin.manageUser.modal.view&create&update.input2')}</label>
                         <input
                             type="password"
                             className="form-control"
@@ -91,7 +91,7 @@ const ModalCreateUser = (props) => {
                         />
                     </div>
                     <div className="col-md-6">
-                        <label className="form-label">{t('admin.manageUser.modal.create.input3')}</label>
+                        <label className="form-label">{t('admin.manageUser.modal.view&create&update.input3')}</label>
                         <input
                             type="text"
                             className="form-control"
@@ -100,18 +100,18 @@ const ModalCreateUser = (props) => {
                         />
                     </div>
                     <div className="col-md-6">
-                        <label className="form-label">{t('admin.manageUser.modal.create.input4.title')}</label>
+                        <label className="form-label">{t('admin.manageUser.modal.view&create&update.input4.title')}</label>
                         <select
                             className="form-select"
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
                         >
-                            <option value="user">{t('admin.manageUser.modal.create.input4.value1')}</option>
-                            <option value="admin">{t('admin.manageUser.modal.create.input4.value2')}</option>
+                            <option value="user">{t('admin.manageUser.modal.view&create&update.input4.value1')}</option>
+                            <option value="admin">{t('admin.manageUser.modal.view&create&update.input4.value2')}</option>
                         </select>
                     </div>
                     <div className="col-md-3">
-                        <label htmlFor="imgPre" className="form-label imgPreLable"><FcPlus /> {t('admin.manageUser.modal.create.input5')}</label>
+                        <label htmlFor="imgPre" className="form-label imgPreLable"><FcPlus /> {t('admin.manageUser.modal.view&create&update.input5')}</label>
                         <input
                             id="imgPre"
                             hidden type="file"
@@ -121,17 +121,17 @@ const ModalCreateUser = (props) => {
 
                     <div className="img-preview-input col-12">
 
-                        {imgPreview ? <img src={imgPreview} /> : <span>{t('admin.manageUser.modal.create.input6')}</span>}
+                        {imgPreview ? <img src={imgPreview} /> : <span>{t('admin.manageUser.modal.view&create&update.input6')}</span>}
 
                     </div>
                 </form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    {t('admin.manageUser.modal.create.btnClose')}
+                    {t('admin.manageUser.modal.view&create&update.btnClose')}
                 </Button>
                 <Button variant="primary" onClick={() => handleCreateUser()}>
-                    {t('admin.manageUser.modal.create.btnCreate')}
+                    {t('admin.manageUser.modal.view&create&update.btnCreate')}
                 </Button>
             </Modal.Footer>
         </Modal>

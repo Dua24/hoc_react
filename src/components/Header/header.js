@@ -52,7 +52,7 @@ const Header = () => {
                                 <button onClick={() => handleClickBtnRegister()} className="btn-signup">{t('header.nav-userAction.btnSignUp')}</button>
                             </>
                             :
-                            <NavDropdown title="Settings" id="basic-nav-dropdown">
+                            <NavDropdown title={t('header.nav-userAction.title')} id="basic-nav-dropdown">
                                 <NavDropdown.Item >{t('header.nav-userAction.btnProfile')}</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => handleLogOut()}>{t('header.nav-userAction.btnLogOut')}</NavDropdown.Item>
                             </NavDropdown>

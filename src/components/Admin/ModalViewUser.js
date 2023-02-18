@@ -7,6 +7,7 @@ import { updateUser } from '../../services/apiServices';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import _ from "lodash"
+import { useTranslation, Trans } from 'react-i18next';
 
 const ModalViewUser = (props) => {
     const { show, setShow, dataUser } = props
@@ -16,6 +17,7 @@ const ModalViewUser = (props) => {
     const [role, setRole] = useState("user")
     const [image, setImage] = useState("")
     const [imgPreview, setImgPreview] = useState("")
+    const { t } = useTranslation();
 
 
     useEffect(() => {
@@ -44,12 +46,12 @@ const ModalViewUser = (props) => {
             onHide={handleClose}
             backdrop="static">
             <Modal.Header closeButton>
-                <Modal.Title>Modal View User</Modal.Title>
+                <Modal.Title>{t('admin.manageUser.modal.view&create&update.titleView')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <form className="row g-3">
                     <div className="col-md-6">
-                        <label className="form-label">Email</label>
+                        <label className="form-label">{t('admin.manageUser.modal.view&create&update.input1')}</label>
                         <input
                             type="email"
                             className="form-control"
@@ -59,7 +61,7 @@ const ModalViewUser = (props) => {
                         />
                     </div>
                     <div className="col-md-6">
-                        <label className="form-label">Password</label>
+                        <label className="form-label">{t('admin.manageUser.modal.view&create&update.input2')}</label>
                         <input
                             type="password"
                             className="form-control"
@@ -70,7 +72,7 @@ const ModalViewUser = (props) => {
                         />
                     </div>
                     <div className="col-md-6">
-                        <label className="form-label">User name</label>
+                        <label className="form-label">{t('admin.manageUser.modal.view&create&update.input3')}</label>
                         <input
                             type="text"
                             className="form-control"
@@ -80,19 +82,19 @@ const ModalViewUser = (props) => {
                         />
                     </div>
                     <div className="col-md-6">
-                        <label className="form-label">Role</label>
+                        <label className="form-label">{t('admin.manageUser.modal.view&create&update.input4.title')}</label>
                         <select
                             className="form-select"
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
                             disabled
                         >
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
+                            <option value="user">{t('admin.manageUser.modal.view&create&update.input4.value1')}</option>
+                            <option value="admin">{t('admin.manageUser.modal.view&create&update.input4.value2')}</option>
                         </select>
                     </div>
                     <div className="col-md-3">
-                        <label htmlFor="imgPre" className="form-label imgPreLable"><FcPlus /> Upload File Image</label>
+                        <label htmlFor="imgPre" className="form-label imgPreLable"><FcPlus /> {t('admin.manageUser.modal.view&create&update.input5')}</label>
                         <input
                             id="imgPre"
                             hidden type="file"
@@ -103,14 +105,14 @@ const ModalViewUser = (props) => {
 
                     <div className="img-preview-input col-12">
 
-                        {imgPreview ? <img src={imgPreview} /> : <span>Preview image</span>}
+                        {imgPreview ? <img src={imgPreview} /> : <span>{t('admin.manageUser.modal.view&create&update.input6')}</span>}
 
                     </div>
                 </form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    {t('admin.manageUser.modal.view&create&update.btnClose')}
                 </Button>
             </Modal.Footer>
         </Modal>

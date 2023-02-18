@@ -12,6 +12,7 @@
         "nav-link2": "User",
         "nav-link3": "Admin",
         "nav-userAction": {
+            "title": "Settings",
             "btnLogin": "Log in",
             "btnSignUp": "Sign up",
             "btnProfile": "Profile",
@@ -27,7 +28,7 @@
                 "title": "Management",
                 "manageFunc1": "Manage User",
                 "manageFunc2": "Manage Quiz",
-                "manageFunc3": "Manage Answer"
+                "manageFunc3": "Manage Question"
             }
         },
         "dashboard": {
@@ -59,8 +60,10 @@
                 }
             },
             "modal": {
-                "create": {
-                    "title": "Modal Create User",
+                "view&create&update": {
+                    "titleCreate": "Modal Create User",
+                    "titleView": "Modal View User",
+                    "titleUpdate": "Modal Update User",
                     "input1": "Email",
                     "input2": "Password",
                     "input3": "User name",
@@ -72,9 +75,77 @@
                     "input5": "Upload File Image",
                     "input6": "Preview image",
                     "btnClose": "Close",
-                    "btnCreate": "Create"
+                    "btnCreate": "Create",
+                    "btnUpdate": "Update"
+                },
+                "delete": {
+                    "title": "Modal Delete User",
+                    "body": {
+                        "text1": "Do you want to",
+                        "text2": "delete",
+                        "text3": "user email",
+                        "btnClose": "Close",
+                        "btnDelete": "Delete"
+                    }
                 }
             }
+        },
+        "manageQuiz": {
+            "label1": {
+                "title": "Manage Quizzes",
+                "header": "Create Quiz",
+                "input1": "Name",
+                "input2": "Description",
+                "input3": {
+                    "title": "Level",
+                    "value1": "Easy",
+                    "value2": "Medium",
+                    "value3": "Hard"
+                },
+                "input4": "Upload File Image",
+                "input5": "Preview image",
+                "btnSave": "Save",
+                "tableQuiz": {
+                    "thead": {
+                        "col1": "ID",
+                        "col2": "Name",
+                        "col3": "Description",
+                        "col4": "Level",
+                        "col5": "Actions"
+                    },
+                    "tbody": {
+                        "btnUpdate": "Update",
+                        "btnDelete": "Delete"
+                    }
+                }
+            },
+            "label2": {
+                "title": "Update Q/A Quiz",
+                "header": "Manage Question",
+                "input1": "Select Quiz",
+                "input2": {
+                    "title": "Add questions",
+                    "inputDescr": "Descriptions",
+                    "inputImg": "0 file choosen",
+                    "inputAnswDescr": "Answer description:"
+                },
+                "btnSave": "Save"
+            },
+            "label3": {
+                "title": "Assign quiz to User",
+                "input1": "Select Quiz",
+                "input2": "Select User",
+                "btnAssign": "Assign"
+            }
+        },
+        "manageQuestion": {
+            "header": "Manage Question",
+            "input1": "Select Quiz",
+            "input2": "Add question",
+            "input3": "Description",
+            "input4": "0 file choosen",
+            "input5": "Description answer",
+            "btnSave": "Save"
         }
     }
 }

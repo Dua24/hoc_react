@@ -10,6 +10,7 @@ import { useTranslation, Trans } from 'react-i18next';
 
 const Admin = (props) => {
     const [collapsed, setCollapsed] = useState(false)
+    const { t } = useTranslation();
 
     return (
         <div className="admin-container">
@@ -26,9 +27,9 @@ const Admin = (props) => {
                     </span>
 
                     <div style={{ display: 'flex', gap: "15px" }}>
-                        <NavDropdown title="Settings" id="basic-nav-dropdown">
-                            <NavDropdown.Item >Profile</NavDropdown.Item>
-                            <NavDropdown.Item>Log out</NavDropdown.Item>
+                        <NavDropdown title={t('header.nav-userAction.title')} id="basic-nav-dropdown">
+                            <NavDropdown.Item >{t('header.nav-userAction.btnProfile')}</NavDropdown.Item>
+                            <NavDropdown.Item>{t('header.nav-userAction.btnLogOut')}</NavDropdown.Item>
                         </NavDropdown>
                         <Language />
                     </div>

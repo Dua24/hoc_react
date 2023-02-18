@@ -13,6 +13,7 @@ import {
 }
     from "../../../services/apiServices";
 import { toast } from 'react-toastify';
+import { useTranslation, Trans } from 'react-i18next';
 
 const QAQuiz = (props) => {
     const initListuestions = [
@@ -30,7 +31,8 @@ const QAQuiz = (props) => {
             ]
         }
     ]
-    console.log("a")
+    const { t } = useTranslation();
+
     const [selectedQuiz, setSelectedQuiz] = useState({})
 
     const [listQuestion, setListQuestion] = useState(initListuestions)
@@ -249,10 +251,10 @@ const QAQuiz = (props) => {
 
     return (
         <div className="questions-container">
-            <div className="title">Manage Question</div>
+            <div className="title">{t('admin.manageQuiz.label2.header')}</div>
             <div className="add-new-question">
                 <div className="col-6 form-group">
-                    <label>Select Quiz</label>
+                    <label>{t('admin.manageQuiz.label2.input1')}</label>
                     <Select
                         defaultValue={selectedQuiz.label}
                         onChange={setSelectedQuiz}
@@ -261,7 +263,7 @@ const QAQuiz = (props) => {
                 </div>
                 <div className="mt-3">
                     <div className="mb-1">
-                        Add question:
+                        {t('admin.manageQuiz.label2.input2.title')}
                     </div>
                     {listQuestion && listQuestion.length > 0 && listQuestion.map((question, indexQuestion) => {
                         return (
@@ -275,7 +277,7 @@ const QAQuiz = (props) => {
                                             value={question.description}
                                             onChange={(e) => handleOnChange("QUESTION", question.id, '', e.target.value)}
                                         />
-                                        <label>Description {indexQuestion + 1}</label>
+                                        <label>{t('admin.manageQuiz.label2.input2.inputDescr')} {indexQuestion + 1}</label>
                                     </div>
                                     <div className="group-upload">
                                         <label className="lable-up" htmlFor={question.id} ><BiImageAdd className="uploadIcon" /></label>
@@ -285,7 +287,7 @@ const QAQuiz = (props) => {
                                             type="file"
                                             onChange={(e) => handleOnChangeFile(question.id, e.target.files[0])}
                                         />
-                                        <label onClick={() => handleSetPreview(question.imageFile, question.imageName)}> {question.imageName ? question.imageName : '0 file choosen'}</label>
+                                        <label onClick={() => handleSetPreview(question.imageFile, question.imageName)}> {question.imageName ? question.imageName : `${t('admin.manageQuiz.label2.input2.inputImg')}`}</label>
 
 
                                     </div>
@@ -323,7 +325,7 @@ const QAQuiz = (props) => {
                                                     value={answ.description}
                                                     onChange={(e) => { handleOnChange("ANSWER", question.id, answ.id, e.target.value, indexQuestion) }}
                                                 />
-                                                <label>Answer description: {answIndex + 1}</label>
+                                                <label>{t('admin.manageQuiz.label2.input2.inputAnswDescr')} {answIndex + 1}</label>
                                             </div>
                                             <div className="btn-group">
                                                 <span >
@@ -348,7 +350,7 @@ const QAQuiz = (props) => {
                     })}
                     {listQuestion && listQuestion.length > 0 &&
                         <div>
-                            <button onClick={() => handleSaveQuestions()} className="btn btn-warning">Save Questions</button>
+                            <button onClick={() => handleSaveQuestions()} className="btn btn-warning">{t('admin.manageQuiz.label2.btnSave')}</button>
 
                         </div>
                     }

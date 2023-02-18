@@ -9,6 +9,7 @@ import _ from "lodash"
 import Lightbox from "react-awesome-lightbox";
 import { getAllQuiz, postAnswersforQuestion, postQuestionforQuiz } from "../../../services/apiServices";
 import { toast } from 'react-toastify';
+import { useTranslation, Trans } from 'react-i18next';
 
 const Questions = (props) => {
     const initListuestions = [
@@ -26,6 +27,7 @@ const Questions = (props) => {
             ]
         }
     ]
+    const { t } = useTranslation();
 
     const [selectedQuiz, setSelectedQuiz] = useState({})
 
@@ -189,10 +191,10 @@ const Questions = (props) => {
 
     return (
         <div className="questions-container">
-            <div className="title">Manage Question</div>
+            <div className="title">{t('admin.manageQuestion.header')}</div>
             <div className="add-new-question">
                 <div className="col-6 form-group">
-                    <label>Select Quiz</label>
+                    <label>{t('admin.manageQuestion.input1')}</label>
                     <Select
                         defaultValue={selectedQuiz}
                         onChange={setSelectedQuiz}
@@ -201,7 +203,7 @@ const Questions = (props) => {
                 </div>
                 <div className="mt-3">
                     <div className="mb-1">
-                        Add question:
+                        {t('admin.manageQuestion.input2')}
                     </div>
                     {listQuestion && listQuestion.length > 0 && listQuestion.map((question, indexQuestion) => {
                         return (
@@ -215,7 +217,7 @@ const Questions = (props) => {
                                             value={question.description}
                                             onChange={(e) => handleOnChange("QUESTION", question.id, '', e.target.value)}
                                         />
-                                        <label>Description {indexQuestion + 1}</label>
+                                        <label>{t('admin.manageQuestion.input3')} {indexQuestion + 1}</label>
                                     </div>
                                     <div className="group-upload">
                                         <label className="lable-up" htmlFor={question.id} ><BiImageAdd className="uploadIcon" /></label>
@@ -225,7 +227,7 @@ const Questions = (props) => {
                                             type="file"
                                             onChange={(e) => handleOnChangeFile(question.id, e.target.files[0])}
                                         />
-                                        <label onClick={() => handleSetPreview(question.image, question.imageName)}> {question.imageName ? question.imageName : '0 file choosen'}</label>
+                                        <label onClick={() => handleSetPreview(question.image, question.imageName)}> {question.imageName ? question.imageName : `${t('admin.manageQuestion.input4')}`}</label>
 
 
                                     </div>
@@ -263,7 +265,7 @@ const Questions = (props) => {
                                                     value={answ.description}
                                                     onChange={(e) => { handleOnChange("ANSWER", question.id, answ.id, e.target.value, indexQuestion) }}
                                                 />
-                                                <label>Answer description: {answIndex + 1}</label>
+                                                <label>{t('admin.manageQuestion.input5')}: {answIndex + 1}</label>
                                             </div>
                                             <div className="btn-group">
                                                 <span >
@@ -288,7 +290,7 @@ const Questions = (props) => {
                     })}
                     {listQuestion && listQuestion.length > 0 &&
                         <div>
-                            <button onClick={() => handleSaveQuestions()} className="btn btn-warning">Save Questions</button>
+                            <button onClick={() => handleSaveQuestions()} className="btn btn-warning">{t('admin.manageQuestion.btnSave')}</button>
 
                         </div>
                     }
