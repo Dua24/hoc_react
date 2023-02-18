@@ -17,5 +17,64 @@
             "btnProfile": "Hồ sơ",
             "btnLogOut": "Đăng xuất"
         }
+    },
+    "admin": {
+        "sidebar": {
+            "main-title": "Dự án của Duy Nguyện",
+            "menuItem1": "Sơ lược về dự án",
+            "menuItem2": "Các chức năng",
+            "menuItem3": {
+                "title": "Quản trị",
+                "manageFunc1": "Quản lý người dùng",
+                "manageFunc2": "Quản lý bài thi",
+                "manageFunc3": "Quản lý đáp án"
+            }
+        },
+        "dashboard": {
+            "title": "Tổng quan chi tiết về dự án",
+            "content": {
+                "overview1": "Tổng số người dùng",
+                "overview2": "Tổng số bài thi",
+                "overview3": "Tổng số câu hỏi",
+                "overview4": "Tổng số đáp án"
+            }
+        },
+        "manageUser": {
+            "title": "Quản lý người dùng",
+            "content": {
+                "btnCreate": "Thêm mới người dùng"
+            },
+            "tableUser": {
+                "thead": {
+                    "col1": "STT",
+                    "col2": "Tên người dùng",
+                    "col3": "Email",
+                    "col4": "Phân quyền",
+                    "col5": "Hành động"
+                },
+                "tbody": {
+                    "btnView": "Xem",
+                    "btnUpdate": "Cập nhật",
+                    "btnDelete": "Xóa"
+                }
+            },
+            "modal": {
+                "create": {
+                    "title": "Thêm mới người dùng",
+                    "input1": "Email",
+                    "input2": "Mật khẩu",
+                    "input3": "Tên đăng nhập",
+                    "input4": {
+                        "title": "Phân quyền",
+                        "value1": "Người dùng",
+                        "value2": "Quản trị viên"
+                    },
+                    "input5": "Tải ảnh lên",
+                    "input6": "Xem trước ảnh",
+                    "btnClose": "Đóng",
+                    "btnCreate": "Tạo mới"
+                }
+            }
+        }
     }
 }

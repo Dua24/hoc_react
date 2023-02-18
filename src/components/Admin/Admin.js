@@ -6,9 +6,11 @@ import { Outlet } from "react-router-dom";
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Language from "../Header/Language";
+import { useTranslation, Trans } from 'react-i18next';
 
 const Admin = (props) => {
     const [collapsed, setCollapsed] = useState(false)
+
     return (
         <div className="admin-container">
             <div className="admin-sidebar">

@@ -11,8 +11,12 @@ import { Link } from "react-router-dom";
 import 'react-pro-sidebar/dist/scss/styles.scss';
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assets/sidebarImg.jpg';
+import { useTranslation, Trans } from 'react-i18next';
+
 const SideBar = (props) => {
     const { collapsed, } = props
+    const { t } = useTranslation();
+
     return (
         <ProSidebar
             image={sidebarBg}
@@ -31,7 +35,7 @@ const SideBar = (props) => {
                         whiteSpace: 'nowrap',
                     }}
                 >
-                    Duy Nguyen Project
+                    {t('admin.sidebar.main-title')}
                 </div>
             </SidebarHeader>
 
@@ -41,25 +45,27 @@ const SideBar = (props) => {
                         icon={<FaTachometerAlt />}
                     >
                         <Link to="/admins" />
-                        Dashboard
+                        {t('admin.sidebar.menuItem1')}
                     </MenuItem>
-                    <MenuItem icon={<FaGem />}> Components</MenuItem>
+                    <MenuItem icon={<FaGem />}> {t('admin.sidebar.menuItem2')}</MenuItem>
                 </Menu>
                 <Menu iconShape="circle">
                     <SubMenu
-                        title="Management"
+                        title={t('admin.sidebar.menuItem3.title')}
                         icon={<FaRegLaughWink />}
                     >
                         <MenuItem>
                             <Link to="manage-users" />
-                            Manage User
+                            {t('admin.sidebar.menuItem3.manageFunc1')}
                         </MenuItem>
                         <MenuItem>
                             <Link to="manage-quizs" />
-                            Manage Quiz</MenuItem>
+                            {t('admin.sidebar.menuItem3.manageFunc2')}
+                        </MenuItem>
                         <MenuItem>
                             <Link to="manage-questions" />
-                            Manage Answer</MenuItem>
+                            {t('admin.sidebar.menuItem3.manageFunc3')}
+                        </MenuItem>
                     </SubMenu>
                 </Menu>
             </SidebarContent>

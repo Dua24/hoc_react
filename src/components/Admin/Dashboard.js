@@ -9,7 +9,10 @@ import {
 } from 'recharts';
 import _ from "lodash"
 import { getDashBoardOverview } from '../../services/apiServices';
+import { useTranslation, Trans } from 'react-i18next';
+
 const Dashboard = (props) => {
+    const { t } = useTranslation();
 
     const [dataDashBoard, setDataDashBoard] = useState({
         users: {
@@ -57,26 +60,25 @@ const Dashboard = (props) => {
             setDataChart(data)
         }
     }
-    console.log(dataChart)
     return (
         < div className="dashboard-container" >
-            <div className="dashboard-title">Analytics Dashboard</div>
+            <div className="dashboard-title">{t('admin.dashboard.title')}</div>
             <div className="dashboard-content">
                 <div className="l-board">
                     <div className="child">
-                        <span className="text-1">Total Users</span>
+                        <span className="text-1">{t('admin.dashboard.content.overview1')}</span>
                         <span className="text-2">{dataDashBoard.users.countUsers}</span>
                     </div>
                     <div className="child">
-                        <span className="text-1">Total Quizzes</span>
+                        <span className="text-1">{t('admin.dashboard.content.overview2')}</span>
                         <span className="text-2">{dataDashBoard.others.countQuiz}</span>
                     </div>
                     <div className="child">
-                        <span className="text-1">Total Questions</span>
+                        <span className="text-1">{t('admin.dashboard.content.overview3')}</span>
                         <span className="text-2">{dataDashBoard.others.countQuestions}</span>
                     </div>
                     <div className="child">
-                        <span className="text-1">Total Answers</span>
+                        <span className="text-1">{t('admin.dashboard.content.overview4')}</span>
                         <span className="text-2">{dataDashBoard.others.countAnswers}</span>
                     </div>
                 </div>

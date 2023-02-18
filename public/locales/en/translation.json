@@ -17,5 +17,64 @@
             "btnProfile": "Profile",
             "btnLogOut": "Log out"
         }
+    },
+    "admin": {
+        "sidebar": {
+            "main-title": "Duy Nguyen Project",
+            "menuItem1": "Dashboard",
+            "menuItem2": "Components",
+            "menuItem3": {
+                "title": "Management",
+                "manageFunc1": "Manage User",
+                "manageFunc2": "Manage Quiz",
+                "manageFunc3": "Manage Answer"
+            }
+        },
+        "dashboard": {
+            "title": "Analytics Dashboard",
+            "content": {
+                "overview1": "Total Users",
+                "overview2": "Total Quizzes",
+                "overview3": "Total Questions",
+                "overview4": "Total Answers"
+            }
+        },
+        "manageUser": {
+            "title": "Manage User",
+            "content": {
+                "btnCreate": "Add new User"
+            },
+            "tableUser": {
+                "thead": {
+                    "col1": "ID",
+                    "col2": "User name",
+                    "col3": "Email",
+                    "col4": "Role",
+                    "col5": "Actions"
+                },
+                "tbody": {
+                    "btnView": "View",
+                    "btnUpdate": "Update",
+                    "btnDelete": "Delete"
+                }
+            },
+            "modal": {
+                "create": {
+                    "title": "Modal Create User",
+                    "input1": "Email",
+                    "input2": "Password",
+                    "input3": "User name",
+                    "input4": {
+                        "title": "Role",
+                        "value1": "User",
+                        "value2": "Admin"
+                    },
+                    "input5": "Upload File Image",
+                    "input6": "Preview image",
+                    "btnClose": "Close",
+                    "btnCreate": "Create"
+                }
+            }
+        }
     }
 }

@@ -2,9 +2,12 @@ import { useState, useEffect } from "react"
 import { toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
 import { } from "react-router-dom";
+import { useTranslation, Trans } from 'react-i18next';
 
 const UserTablePaginate = (props) => {
     const { listUser, currentPage, setCurrentPage, pageCount } = props
+    const { t } = useTranslation();
+
     const handlePageClick = (event) => {
         props.fetchListUserPaginate(+event.selected + 1)
         setCurrentPage(+event.selected + 1)
@@ -14,11 +17,11 @@ const UserTablePaginate = (props) => {
             <table className="table table-hover table-bordered ">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">User name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">{t('admin.manageUser.tableUser.thead.col1')}</th>
+                        <th scope="col">{t('admin.manageUser.tableUser.thead.col2')}</th>
+                        <th scope="col">{t('admin.manageUser.tableUser.thead.col3')}</th>
+                        <th scope="col">{t('admin.manageUser.tableUser.thead.col4')}</th>
+                        <th scope="col">{t('admin.manageUser.tableUser.thead.col5')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,9 +33,9 @@ const UserTablePaginate = (props) => {
                             <td>{item.email}</td>
                             <td>{item.role}</td>
                             <td>
-                                <button onClick={() => props.handleClickBtnViewUser(item)} className="btn btn-primary">View</button>
-                                <button onClick={() => props.handleClickBtnUpdateUser(item)} className="btn btn-warning mx-3">Update</button>
-                                <button onClick={() => props.handleClickBtnDeleteUser(item)} className="btn btn-danger">Delete</button>
+                                <button onClick={() => props.handleClickBtnViewUser(item)} className="btn btn-primary">{t('admin.manageUser.tableUser.tbody.btnView')}</button>
+                                <button onClick={() => props.handleClickBtnUpdateUser(item)} className="btn btn-warning mx-3">{t('admin.manageUser.tableUser.tbody.btnUpdate')}</button>
+                                <button onClick={() => props.handleClickBtnDeleteUser(item)} className="btn btn-danger">{t('admin.manageUser.tableUser.tbody.btnDelete')}</button>
                             </td>
                         </tr>
                     )}

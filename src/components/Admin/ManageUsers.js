@@ -7,6 +7,7 @@ import ModalUpdateUser from "./ModalUpdateUser";
 import ModalViewUser from "./ModalViewUser";
 import UserTablePaginate from "./UserTablePaginate";
 import { getUsersWithPaginate } from "../../services/apiServices"
+import { useTranslation, Trans } from 'react-i18next';
 
 const ManageUsers = (props) => {
     const [showModalCreateUser, setShowModalCreateUser] = useState(false)
@@ -19,6 +20,7 @@ const ManageUsers = (props) => {
     const [pageCount, setPageCount] = useState(1)
     const USER_LIMIT = 3
     const [currentPage, setCurrentPage] = useState(1)
+    const { t } = useTranslation();
 
 
     useEffect(() => {
@@ -56,10 +58,10 @@ const ManageUsers = (props) => {
     return (
         <>
             <div className="manageUser-container">
-                <div className="title">Manage USer</div>
+                <div className="title">{t('admin.manageUser.title')}</div>
                 <div className="users-content">
                     <div>
-                        <button onClick={() => setShowModalCreateUser(true)} className="btn btn-primary">Add new User</button>
+                        <button onClick={() => setShowModalCreateUser(true)} className="btn btn-primary">{t('admin.manageUser.content.btnCreate')}</button>
                     </div>
                     <div>
                         {/* <UserTable
