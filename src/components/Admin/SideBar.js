@@ -12,11 +12,11 @@ import 'react-pro-sidebar/dist/scss/styles.scss';
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assets/sidebarImg.jpg';
 import { useTranslation, Trans } from 'react-i18next';
-
+import { useNavigate } from 'react-router-dom';
 const SideBar = (props) => {
     const { collapsed, } = props
     const { t } = useTranslation();
-
+    const navigate = useNavigate()
     return (
         <ProSidebar
             image={sidebarBg}
@@ -24,6 +24,7 @@ const SideBar = (props) => {
         >
             <SidebarHeader>
                 <div
+                    onClick={() => navigate("/")}
                     style={{
                         padding: '24px',
                         textTransform: 'uppercase',
@@ -33,6 +34,7 @@ const SideBar = (props) => {
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
+                        cursor: "pointer"
                     }}
                 >
                     {t('admin.sidebar.main-title')}

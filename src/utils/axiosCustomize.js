@@ -1,7 +1,8 @@
 import axios from "axios"
 import nProgress from "nprogress";
 import { store } from "../redux/store"
-
+import { postRefreshToken } from "../services/apiServices";
+import axiosRetry from 'axios-retry';
 nProgress.configure({
     showSpinner: false,
     trickleSpeed: 100
@@ -24,13 +25,21 @@ instance.interceptors.request.use(function (config) {
 // Add a response interceptor
 instance.interceptors.response.use(function (response) {
     nProgress.done();
-
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     return response && response.data ? response.data : response;
 }, function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
+
+
+    // token expired
+    // error.response.data.EC === -999
+
+    if (error.response.data && error.response.data.EC === -999) {
+        window.location.href = "/login"
+    }
+
     return error && error.response && error.response.data ? error.response.data : Promise.reject(error);
 });
 

@@ -117,10 +117,38 @@ const getDashBoardOverview = () => {
     return axios.get('api/v1/overview')
 }
 
+const postRefreshToken = (email, refresh_token) => {
+    return axios.post('api/v1/refresh-token',
+        {
+            email,
+            refresh_token
+        })
+}
+
+const updateProfile = (username, userImage) => {
+    const data = new FormData()
+    data.append('username', username)
+    data.append('userImage', userImage)
+    return axios.post('api/v1/profile', data)
+}
+
+const changePassword = (current_password, new_password) => {
+    return axios.post('api/v1/change-password',
+        {
+            current_password,
+            new_password
+        })
+}
+
+const getHistory = () => {
+    return axios.get('api/v1/history')
+}
+
 export {
     createUser, getAllUsers, deleteUser, updateUser, getUsersWithPaginate,
     login, register, getQuizByUser, getQuestionByQuizId, postSubmitQuiz,
     postQuiz, postAssignQuizToUser, getAllQuiz, updateQuiz, deleteQuiz,
     postQuestionforQuiz, postAnswersforQuestion, postAssginQuiz2User,
-    getQuizWithQA, postUpSertQAforQuiz, logOut, getDashBoardOverview
+    getQuizWithQA, postUpSertQAforQuiz, logOut, getDashBoardOverview,
+    postRefreshToken, updateProfile, changePassword, getHistory
 } 

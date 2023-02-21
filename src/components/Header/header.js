@@ -11,6 +11,8 @@ import { logOut } from "../../services/apiServices"
 import { doLogout } from "../../redux/action/userAction.js"
 import Language from './Language';
 import { useTranslation, Trans } from 'react-i18next';
+import { useState } from 'react'
+import ModalProfile from './Profile/Profile';
 const Header = () => {
     const { isAuthenticated, account } = useSelector(state => state.user)
     const dispatch = useDispatch()
@@ -34,6 +36,8 @@ const Header = () => {
     }
     // const account = useSelector(state => state.user.account)
 
+    const [showModalProfile, setShowModalProfile] = useState(false)
+
     return (
         <Navbar bg="light" expand="lg">
             <Container>
@@ -53,7 +57,7 @@ const Header = () => {
                             </>
                             :
                             <NavDropdown title={t('header.nav-userAction.title')} id="basic-nav-dropdown">
-                                <NavDropdown.Item >{t('header.nav-userAction.btnProfile')}</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => setShowModalProfile(true)} >{t('header.nav-userAction.btnProfile')}</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => handleLogOut()}>{t('header.nav-userAction.btnLogOut')}</NavDropdown.Item>
                             </NavDropdown>
 
@@ -63,6 +67,10 @@ const Header = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Container>
+            <ModalProfile
+                show={showModalProfile}
+                setShow={setShowModalProfile}
+            />
         </Navbar>
     );
 }

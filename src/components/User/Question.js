@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import _ from "lodash"
 import Lightbox from "react-awesome-lightbox";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"
 const Question = (props) => {
-    const { dataQuiz, indexQuestion } = props
+    const { dataQuiz, indexQuestion, arrCorrectAnswer } = props
 
     const [previewImg, setPreviewImg] = useState(false)
     if (_.isEmpty(dataQuiz)) {
@@ -11,7 +12,6 @@ const Question = (props) => {
     const handleCheckBoxs = (e, answId, idQuestion) => {
         props.handleCheckBox(answId, idQuestion)
     }
-
     return (
         <>
             {dataQuiz.image ?
@@ -39,6 +39,15 @@ const Question = (props) => {
                                     <label className="form-check-label" htmlFor="flexCheckChecked">
                                         {index + 1}. {answ.description}
                                     </label>
+                                    {props.PressBtnShowAnswer && !_.isEmpty(arrCorrectAnswer) &&
+                                        <span style={{ marginLeft: "8px" }}>
+                                            {arrCorrectAnswer.includes(answ.id) ?
+                                                <span style={{ color: 'green' }}><AiOutlineCheck /></span>
+                                                :
+                                                <span style={{ color: "red" }}><AiOutlineClose /></span>
+                                            }
+                                        </span>
+                                    }
                                 </div>
                             </div>
                         )

@@ -6,8 +6,8 @@ import "./DetailQuiz.scss"
 import Question from './Question';
 import ModalResult from './ModalResult';
 import RightContent from './Content/RightContent';
-
-
+import { AiOutlineRollback } from "react-icons/ai"
+import { useNavigate } from 'react-router-dom';
 const DetailQuiz = (props) => {
     const { quizId } = useParams()
     const location = useLocation()
@@ -15,8 +15,9 @@ const DetailQuiz = (props) => {
     const [indexQuestion, setIndexQuestion] = useState(0)
     const [isShowModalResult, setIsShowModalResult] = useState(false)
     const [dataModalResult, setDataModalResult] = useState({})
-    const [answerChecked, setAnswerChecked] = useState(false)
-
+    const [arrCorrectAnswer, setArrCorrectAnswer] = useState([])
+    const [PressBtnShowAnswer, setPressBtnShowAnswer] = useState(false)
+    const navigate = useNavigate()
     useEffect(() => {
         fetchQuestionByQuizId()
     }, [])
@@ -71,6 +72,21 @@ const DetailQuiz = (props) => {
             alert("Sthing wrong???")
         }
 
+
+
+    }
+
+    const handleShowDetailAnswer = () => {
+        setPressBtnShowAnswer(true)
+        const correctAnsws = []
+        setIsShowModalResult(false)
+        dataModalResult.quizData.map((a) => {
+            a.systemAnswers.map((correctA) => {
+                correctAnsws.push(correctA.id)
+            })
+        })
+        setArrCorrectAnswer(correctAnsws)
+
     }
 
 
@@ -109,6 +125,15 @@ const DetailQuiz = (props) => {
     return (
         <div className="detail-quiz-container">
             <div className="left-content">
+
+                {PressBtnShowAnswer && <span
+                    className="goBackQuizzes"
+                    onClick={() => navigate("/users")}
+                >
+                    <AiOutlineRollback />
+                    Go back Quizzes
+                </span>}
+
                 <div className="title">Quiz {quizId}: {location.state.quizTitle}</div>
                 <div className="q-body">
                     <img alt="" />
@@ -118,13 +143,21 @@ const DetailQuiz = (props) => {
                         dataQuiz={dataQuiz && dataQuiz.length > 0 ? dataQuiz[indexQuestion] : []}
                         indexQuestion={indexQuestion}
                         handleCheckBox={handleCheckBox}
+                        arrCorrectAnswer={arrCorrectAnswer}
+                        PressBtnShowAnswer={PressBtnShowAnswer}
+
 
                     />
                 </div>
                 <div className="footer">
                     <button onClick={() => handlePrev()} className="btn btn-secondary">Prev</button>
                     <button onClick={() => handleNext()} className="btn btn-primary">Next</button>
-                    <button onClick={() => handleSubmitAnswer()} className="btn btn-warning">Finish</button>
+                    <button
+                        disabled={PressBtnShowAnswer}
+                        onClick={() => handleSubmitAnswer()}
+                        className="btn btn-warning">
+                        Finish
+                    </button>
                 </div>
             </div>
             <div className="right-content">
@@ -132,13 +165,14 @@ const DetailQuiz = (props) => {
                     dataQuiz={dataQuiz}
                     handleSubmitAnswer={handleSubmitAnswer}
                     setIndexQuestion={setIndexQuestion}
+                    PressBtnShowAnswer={PressBtnShowAnswer}
                 />
             </div>
             <ModalResult
                 show={isShowModalResult}
                 setShow={setIsShowModalResult}
                 dataModalResult={dataModalResult}
-
+                handleShowDetailAnswer={handleShowDetailAnswer}
             />
         </div>
     )

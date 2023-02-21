@@ -17,7 +17,8 @@
             "btnSignUp": "Đăng ký",
             "btnProfile": "Hồ sơ",
             "btnLogOut": "Đăng xuất"
-        }
+        },
+        "modalProfile": {}
     },
     "admin": {
         "sidebar": {

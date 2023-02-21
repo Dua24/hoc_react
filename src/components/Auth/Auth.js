@@ -72,6 +72,7 @@ const Auth = (props) => {
             toast.success(res.EM)
         }
         else {
+            setLoadingIcon(false)
             toast.error(res.EM)
             setEmail("")
             setPassword("")

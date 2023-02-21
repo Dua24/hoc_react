@@ -7,10 +7,32 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Language from "../Header/Language";
 import { useTranslation, Trans } from 'react-i18next';
+import ModalProfile from "../Header/Profile/Profile";
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { logOut } from "../../services/apiServices"
+import { useDispatch } from "react-redux"
+import { doLogout } from "../../redux/action/userAction.js"
+import { useNavigate } from "react-router-dom";
 
 const Admin = (props) => {
     const [collapsed, setCollapsed] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { isAuthenticated, account } = useSelector(state => state.user)
     const { t } = useTranslation();
+    const [show, setShow] = useState(false)
+
+    const handleLogOut = async () => {
+        const res = await logOut(account.email, account.refresh_token)
+        if (res.EC == 0) {
+            toast.success(res.EM)
+            dispatch(doLogout(res))
+            navigate("/")
+        } else {
+            toast.error(res.EM)
+        }
+    }
 
     return (
         <div className="admin-container">
@@ -28,8 +50,8 @@ const Admin = (props) => {
 
                     <div style={{ display: 'flex', gap: "15px" }}>
                         <NavDropdown title={t('header.nav-userAction.title')} id="basic-nav-dropdown">
-                            <NavDropdown.Item >{t('header.nav-userAction.btnProfile')}</NavDropdown.Item>
-                            <NavDropdown.Item>{t('header.nav-userAction.btnLogOut')}</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => setShow(true)}>{t('header.nav-userAction.btnProfile')}</NavDropdown.Item>
+                            <NavDropdown.Item onClick={() => handleLogOut()}>{t('header.nav-userAction.btnLogOut')}</NavDropdown.Item>
                         </NavDropdown>
                         <Language />
                     </div>
@@ -42,6 +64,10 @@ const Admin = (props) => {
                     </PerfectScrollbar>
                 </div>
             </div>
+            <ModalProfile
+                show={show}
+                setShow={setShow}
+            />
         </div>
     )
 }

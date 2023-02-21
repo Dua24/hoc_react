@@ -44,6 +44,7 @@ const RightContent = (props) => {
                 <CountDown
                     s={6000}
                     handleTimeOut={handleTimeOut}
+                    PressBtnShowAnswer={props.PressBtnShowAnswer}
                 />
             </div>
             <div className="main-question">

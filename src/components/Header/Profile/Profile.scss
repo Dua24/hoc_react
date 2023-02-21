@@ -1,0 +1,16 @@
+.ProfileModal{
+    ul.tabsProfile{
+        flex-direction: row;
+        .nav-link{
+            &.active{
+                color: #fff;
+            }
+            &:hover{
+                color:#fff;
+                background-color: #a5b6d0;
+            }
+
+        }
+    }
+   
+}

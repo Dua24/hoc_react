@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
-
+import { useNavigate } from 'react-router-dom';
 const ModalResult = (props) => {
     const { show, setShow, dataModalResult } = props
-
+    const nagivate = useNavigate()
 
     const handleClose = () => {
         setShow(false)
+        nagivate("/users")
     }
-
     return (
 
         <Modal
@@ -27,7 +27,7 @@ const ModalResult = (props) => {
                 <div>Total Correct answers: <b>{dataModalResult.countCorrect}</b> </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={() => props.handleShowDetailAnswer()}>
                     Show answers
                 </Button>
                 <Button variant="secondary" onClick={handleClose}>

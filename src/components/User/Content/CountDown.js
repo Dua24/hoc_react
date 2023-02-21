@@ -29,7 +29,8 @@ const CountDown = (props) => {
         return hours + ':' + minutes + ':' + seconds;
     }
     return (
-        <div>{timeLeft.toString().toHHMMSS()}</div>
+        props.PressBtnShowAnswer ? <span style={{ color: "red", fontWeight: "bold" }}>FINISHED</span> :
+            <div>{timeLeft.toString().toHHMMSS()}</div>
     )
 }
 
